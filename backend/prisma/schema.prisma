@@ -1,0 +1,132 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  password      String?   // null if OAuth
+  name          String?
+  company       String?
+  status        UserStatus @default(PENDING)
+  role          UserRole   @default(USER)
+  plan          Plan       @default(BASIC)
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  
+  // Relations
+  instances     Instance[]
+  invoices      Invoice[]
+  sessions      Session[]
+  
+  @@map("users")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+  
+  @@map("sessions")
+}
+
+model Instance {
+  id            String   @id @default(cuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  name          String   // rahul, agency, etc.
+  domain        String   // rahul.neuravolt.cloud
+  containerId   String?  // Docker container ID
+  status        InstanceStatus @default(PENDING)
+  
+  // Resources
+  cpuLimit      Float    @default(0.5)
+  memoryLimit   String   @default("512m")
+  storageLimit  String   @default("10GB")
+  
+  // Apps deployed
+  apps          Json     @default("[]") // ["n8n", "openwebui"]
+  
+  // Metrics (cached)
+  cpuUsage      Float?
+  memoryUsage   Float?
+  diskUsage     String?
+  lastBackup    DateTime?
+  
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  @@map("instances")
+}
+
+model Invoice {
+  id            String   @id @default(cuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  amount        Decimal  @db.Decimal(10, 2)
+  currency      String   @default("INR")
+  status        InvoiceStatus @default(PENDING)
+  dueDate       DateTime
+  paidAt        DateTime?
+  
+  items         Json     // [{plan: "Pro", amount: 2000, period: "Monthly"}]
+  
+  createdAt     DateTime @default(now())
+  
+  @@map("invoices")
+}
+
+model PlanConfig {
+  id            String   @id @default(cuid())
+  name          Plan     @unique
+  cpu           Float
+  memory        String
+  storage       String
+  priceMonthly  Decimal  @db.Decimal(10, 2)
+  description   String?
+  
+  @@map("plan_configs")
+}
+
+enum UserStatus {
+  PENDING
+  ACTIVE
+  SUSPENDED
+  DELETED
+}
+
+enum UserRole {
+  USER
+  ADMIN
+}
+
+enum Plan {
+  LITE
+  BASIC
+  PRO
+  HEAVY
+}
+
+enum InstanceStatus {
+  PENDING
+  CREATING
+  RUNNING
+  STOPPED
+  ERROR
+}
+
+enum InvoiceStatus {
+  PENDING
+  PAID
+  OVERDUE
+  CANCELLED
+}

@@ -1,0 +1,10 @@
+postgres-data/
+redis-data/
+node_modules/
+.next/
+dist/
+.DS_Store
+.env
+secrets/
+traefik/letsencrypt/
+*.log

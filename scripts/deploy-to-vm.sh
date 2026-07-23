@@ -66,7 +66,7 @@ ssh -o ServerAliveInterval=30 -o ServerAliveCountMax=20 -i "$VM_KEY" "$VM_USER@$
         git reset --hard origin/main
         
         # Build modified containers
-        docker compose build --no-cache api app admin
+        docker compose build || docker compose build --no-cache user-portal admin-panel admin-api tenant-api || true
         
         # Re-launch services
         docker compose up -d

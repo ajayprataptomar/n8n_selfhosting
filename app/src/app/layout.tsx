@@ -18,6 +18,47 @@ import {
   Info
 } from "lucide-react";
 
+interface ModelOption {
+  id: string;
+  displayName: string;
+  baseModel: string;
+  size: string;
+  category: "coding" | "chat";
+  disabled?: boolean;
+}
+
+const MODELS_BY_PLAN: Record<string, ModelOption[]> = {
+  STARTER: [
+    { id: "harikson-coder-7b", displayName: "Harikson Coder 7B", baseModel: "Qwen2.5-Coder 7B", size: "5–6 GB", category: "coding" },
+    { id: "harikson-coder-v2-lite", displayName: "Harikson Coder V2 Lite", baseModel: "DeepSeek-Coder V2 Lite", size: "6–8 GB", category: "coding" },
+    { id: "harikson-codegemma-7b", displayName: "Harikson CodeGemma 7B", baseModel: "CodeGemma 7B", size: "5–6 GB", category: "coding" },
+    { id: "harikson-chat-8b", displayName: "Harikson Chat 8B", baseModel: "Qwen3 8B", size: "5–6 GB", category: "chat" },
+    { id: "harikson-llama-3.1-8b", displayName: "Harikson Llama 3.1 8B", baseModel: "Llama 3.1 8B", size: "5–6 GB", category: "chat" },
+    { id: "harikson-gemma-3-4b", displayName: "Harikson Gemma 3 4B", baseModel: "Gemma 3 4B", size: "3–4 GB", category: "chat" },
+    { id: "harikson-mistral-7b", displayName: "Harikson Mistral 7B", baseModel: "Mistral 7B Instruct", size: "5–6 GB", category: "chat" }
+  ],
+  PRO: [
+    { id: "harikson-coder-14b", displayName: "Harikson Coder 14B", baseModel: "Qwen2.5-Coder 14B", size: "10–12 GB", category: "coding" },
+    { id: "harikson-coder-16b", displayName: "Harikson Coder 16B", baseModel: "DeepSeek-Coder 16B", size: "10–12 GB", category: "coding" },
+    { id: "harikson-chat-14b", displayName: "Harikson Chat 14B", baseModel: "Qwen3 14B", size: "10–12 GB", category: "chat" },
+    { id: "harikson-gemma-3-12b", displayName: "Harikson Gemma 3 12B", baseModel: "Gemma 3 12B", size: "9–11 GB", category: "chat" }
+  ],
+  BUSINESS: [
+    { id: "harikson-coder-14b", displayName: "Harikson Coder 14B", baseModel: "Qwen2.5-Coder 14B", size: "10–12 GB", category: "coding" },
+    { id: "harikson-coder-v2-lite", displayName: "Harikson Coder V2 Lite", baseModel: "DeepSeek-Coder V2 Lite", size: "10–14 GB", category: "coding" },
+    { id: "harikson-chat-14b", displayName: "Harikson Chat 14B", baseModel: "Qwen3 14B", size: "10–12 GB", category: "chat" },
+    { id: "harikson-chat-30b-a3b", displayName: "Harikson Chat 30B-A3B", baseModel: "Qwen3 30B-A3B", size: "10–14 GB", category: "chat" },
+    { id: "harikson-llama-3.3-70b", displayName: "Harikson Llama 3.3 70B (Not Practical)", baseModel: "Llama 3.3 70B", size: "Not Practical", category: "chat", disabled: true }
+  ],
+  ENTERPRISE: [
+    { id: "harikson-coder-32b", displayName: "Harikson Coder 32B", baseModel: "Qwen2.5-Coder 32B", size: "20–24 GB", category: "coding" },
+    { id: "harikson-coder-v2", displayName: "Harikson Coder V2", baseModel: "DeepSeek-Coder V2", size: "20–24 GB", category: "coding" },
+    { id: "harikson-chat-32b", displayName: "Harikson Chat 32B", baseModel: "Qwen3 32B", size: "20–24 GB", category: "chat" },
+    { id: "harikson-chat-35b-a3b", displayName: "Harikson Chat 35B-A3B", baseModel: "Qwen3 35B-A3B", size: "6–8 GB", category: "chat" },
+    { id: "harikson-chat-32b-instruct", displayName: "Harikson Chat 32B Instruct", baseModel: "Qwen2.5 32B Instruct", size: "20–24 GB", category: "chat" }
+  ]
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -33,7 +74,14 @@ export default function RootLayout({
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [company, setCompany] = useState("");
-  const [plan, setPlan] = useState("BASIC");
+  const [plan, setPlan] = useState("STARTER");
+  const [aiPlan, setAiPlan] = useState("STARTER");
+  const [selectedModel, setSelectedModel] = useState("harikson-chat-8b");
+
+  const [buyN8n, setBuyN8n] = useState<boolean>(true);
+  const [buyAi, setBuyAi] = useState<boolean>(false);
+  const [n8nEnabled, setN8nEnabled] = useState<boolean>(true);
+  const [aiEnabled, setAiEnabled] = useState<boolean>(false);
   
   const [error, setError] = useState("");
   const [info, setInfo] = useState("");
@@ -45,13 +93,57 @@ export default function RootLayout({
       if (token) {
         setIsAuthenticated(true);
       }
+
+      // Parse product query parameters
+      const params = new URLSearchParams(window.location.search);
+      const productParam = params.get("product");
+      if (productParam === "n8n") {
+        setBuyN8n(true);
+        setBuyAi(false);
+      } else if (productParam === "ai") {
+        setBuyN8n(false);
+        setBuyAi(true);
+      } else if (productParam === "both") {
+        setBuyN8n(true);
+        setBuyAi(true);
+      }
       
       const path = window.location.pathname;
       if (path.includes("/billing")) setActiveTab("billing");
       else if (path.includes("/settings")) setActiveTab("settings");
+      else if (path.includes("/harikson")) setActiveTab("harikson");
       else setActiveTab("dashboard");
     }
   }, []);
+
+  // Fetch user profile to read product entitlements
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const token = localStorage.getItem("nv_user_token");
+      if (token) {
+        try {
+          const profile = await ApiClient.get<{ n8nEnabled: boolean; aiEnabled: boolean }>("/auth/me");
+          setN8nEnabled(profile.n8nEnabled);
+          setAiEnabled(profile.aiEnabled);
+          localStorage.setItem("nv_user_n8n_enabled", String(profile.n8nEnabled));
+          localStorage.setItem("nv_user_ai_enabled", String(profile.aiEnabled));
+          
+          // Redirect if user only has AI Agents enabled and is on root page
+          if (profile.aiEnabled && !profile.n8nEnabled && window.location.pathname === "/") {
+            router.push("/harikson");
+            setActiveTab("harikson");
+          }
+        } catch (err) {
+          console.error("Failed to load user profile:", err);
+          setN8nEnabled(localStorage.getItem("nv_user_n8n_enabled") !== "false");
+          setAiEnabled(localStorage.getItem("nv_user_ai_enabled") === "true");
+        }
+      }
+    };
+    if (isAuthenticated) {
+      fetchProfile();
+    }
+  }, [isAuthenticated]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -77,14 +169,43 @@ export default function RootLayout({
     }
   };
 
+  useEffect(() => {
+    const available = MODELS_BY_PLAN[aiPlan] || [];
+    const firstEnabled = available.find(m => !m.disabled);
+    if (firstEnabled) {
+      setSelectedModel(firstEnabled.id);
+    }
+  }, [aiPlan]);
+
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     setInfo("");
+
+    if (!buyN8n && !buyAi) {
+      setError("Please select at least one product offering to signup.");
+      return;
+    }
+
     setLoading(true);
 
     try {
-      await ApiClient.post("/auth/signup", { email, password, name, company, plan });
+      const available = MODELS_BY_PLAN[aiPlan] || [];
+      const modelConfig = available.find(m => m.id === selectedModel);
+      const agentType = modelConfig?.category === "coding" ? "CODING" : "CHAT";
+
+      await ApiClient.post("/auth/signup", { 
+        email, 
+        password, 
+        name, 
+        company, 
+        plan,
+        aiPlan,
+        agentType,
+        model: selectedModel,
+        n8nEnabled: buyN8n,
+        aiEnabled: buyAi
+      });
 
       setInfo("Account registered! Your access is pending administrator approval.");
       setIsLoginView(true);
@@ -259,19 +380,96 @@ export default function RootLayout({
                   </div>
 
                   <div>
-                    <label style={{ display: "block", fontSize: "0.75rem", color: "rgba(255,255,255,0.6)", marginBottom: "4px" }}>Select Subscription Plan</label>
-                    <select 
-                      className="input-field" 
-                      style={{ fontSize: "0.85rem", padding: "8px 12px" }}
-                      value={plan}
-                      onChange={(e) => setPlan(e.target.value)}
-                    >
-                      <option value="LITE">LITE - ₹499/mo (0.5 CPU, 512MB RAM)</option>
-                      <option value="BASIC">BASIC - ₹999/mo (0.5 CPU, 512MB RAM + Addons)</option>
-                      <option value="PRO">PRO - ₹1999/mo (1.0 CPU, 1024MB RAM)</option>
-                      <option value="HEAVY">HEAVY - ₹3999/mo (2.0 CPU, 2048MB RAM)</option>
-                    </select>
+                    <label style={{ display: "block", fontSize: "0.8rem", color: "rgba(255,255,255,0.6)", marginBottom: "8px", fontWeight: "600" }}>Products to Purchase</label>
+                    <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+                      <label style={{ display: "flex", alignItems: "center", gap: "10px", cursor: "pointer", background: "rgba(255,255,255,0.02)", padding: "10px 14px", borderRadius: "8px", border: "1px solid rgba(255,255,255,0.06)" }}>
+                        <input 
+                          type="checkbox" 
+                          checked={buyN8n} 
+                          onChange={(e) => setBuyN8n(e.target.checked)}
+                          style={{ accentColor: "#8b5cf6", width: "16px", height: "16px" }}
+                        />
+                        <div>
+                          <div style={{ fontSize: "0.85rem", fontWeight: "600" }}>n8n Workflows Automation</div>
+                          <div style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.4)" }}>Deploy isolated workflow containers</div>
+                        </div>
+                      </label>
+
+                      <label style={{ display: "flex", alignItems: "center", gap: "10px", cursor: "pointer", background: "rgba(255,255,255,0.02)", padding: "10px 14px", borderRadius: "8px", border: "1px solid rgba(255,255,255,0.06)" }}>
+                        <input 
+                          type="checkbox" 
+                          checked={buyAi} 
+                          onChange={(e) => setBuyAi(e.target.checked)}
+                          style={{ accentColor: "#8b5cf6", width: "16px", height: "16px" }}
+                        />
+                        <div>
+                          <div style={{ fontSize: "0.85rem", fontWeight: "600" }}>Harikson AI Agents Core</div>
+                          <div style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.4)" }}>Deploy Ollama, custom templates & vector pools</div>
+                        </div>
+                      </label>
+                    </div>
                   </div>
+
+                  {buyN8n && (
+                    <div>
+                      <label style={{ display: "block", fontSize: "0.75rem", color: "rgba(255,255,255,0.6)", marginBottom: "4px" }}>Select n8n Subscription Plan</label>
+                      <select 
+                        className="input-field" 
+                        style={{ fontSize: "0.85rem", padding: "8px 12px" }}
+                        value={plan}
+                        onChange={(e) => setPlan(e.target.value)}
+                      >
+                        <option value="STARTER">STARTER - ₹2,499/mo (0.5 CPU, 512MB RAM)</option>
+                        <option value="PRO">PRO - ₹4,999/mo (1.0 CPU, 1024MB RAM)</option>
+                        <option value="BUSINESS">BUSINESS - ₹10,999/mo (2.0 CPU, 2048MB RAM)</option>
+                        <option value="ENTERPRISE">ENTERPRISE - Custom Pricing (4.0 CPU, 4096MB RAM)</option>
+                      </select>
+                    </div>
+                  )}
+
+                  {buyAi && (
+                    <div>
+                      <label style={{ display: "block", fontSize: "0.75rem", color: "rgba(255,255,255,0.6)", marginBottom: "4px" }}>Select AI Agents Plan</label>
+                      <select 
+                        className="input-field" 
+                        style={{ fontSize: "0.85rem", padding: "8px 12px" }}
+                        value={aiPlan}
+                        onChange={(e) => setAiPlan(e.target.value)}
+                      >
+                        <option value="STARTER">STARTER AI - ₹2,499/mo (8 GB RAM)</option>
+                        <option value="PRO">PRO AI - ₹4,999/mo (12 GB RAM)</option>
+                        <option value="BUSINESS">BUSINESS AI - ₹10,999/mo (16 GB RAM)</option>
+                        <option value="ENTERPRISE">ENTERPRISE AI - Custom Pricing (24 GB RAM)</option>
+                      </select>
+                    </div>
+                  )}
+
+                  {buyAi && (
+                    <div>
+                      <label style={{ display: "block", fontSize: "0.75rem", color: "rgba(255,255,255,0.6)", marginBottom: "4px" }}>Select AI Agent Model</label>
+                      <select 
+                        className="input-field" 
+                        style={{ fontSize: "0.85rem", padding: "8px 12px" }}
+                        value={selectedModel}
+                        onChange={(e) => setSelectedModel(e.target.value)}
+                      >
+                        <optgroup label="Best Coding" style={{ background: "#1f1f2e", color: "#a78bfa" }}>
+                          {(MODELS_BY_PLAN[aiPlan] || []).filter(m => m.category === "coding").map(m => (
+                            <option key={m.id} value={m.id} disabled={m.disabled} style={{ background: "#0a0a0f", color: "white" }}>
+                              {m.displayName} ({m.baseModel}) &rarr; {m.size}
+                            </option>
+                          ))}
+                        </optgroup>
+                        <optgroup label="Best General Chat" style={{ background: "#1f1f2e", color: "#a78bfa" }}>
+                          {(MODELS_BY_PLAN[aiPlan] || []).filter(m => m.category === "chat").map(m => (
+                            <option key={m.id} value={m.id} disabled={m.disabled} style={{ background: "#0a0a0f", color: "white" }}>
+                              {m.displayName} ({m.baseModel}) &rarr; {m.size}
+                            </option>
+                          ))}
+                        </optgroup>
+                      </select>
+                    </div>
+                  )}
 
                   <button type="submit" className="btn btn-primary" style={{ width: "100%", padding: "10px", marginTop: "5px" }} disabled={loading}>
                     {loading ? "Registering Account..." : "Create Account"}
@@ -309,14 +507,16 @@ export default function RootLayout({
             </div>
 
             <nav style={{ display: "flex", flexDirection: "column", gap: "8px", flex: 1 }}>
-              <button 
-                onClick={() => navigateTo("dashboard", "/")}
-                className="btn" 
-                style={{ justifyContent: "flex-start", width: "100%", background: activeTab === "dashboard" ? "rgba(139, 92, 246, 0.15)" : "transparent", color: activeTab === "dashboard" ? "#a78bfa" : "rgba(255,255,255,0.7)" }}
-              >
-                <LayoutDashboard size={18} />
-                <span>My Dashboard</span>
-              </button>
+              {n8nEnabled && (
+                <button 
+                  onClick={() => navigateTo("dashboard", "/")}
+                  className="btn" 
+                  style={{ justifyContent: "flex-start", width: "100%", background: activeTab === "dashboard" ? "rgba(139, 92, 246, 0.15)" : "transparent", color: activeTab === "dashboard" ? "#a78bfa" : "rgba(255,255,255,0.7)" }}
+                >
+                  <LayoutDashboard size={18} />
+                  <span>My Dashboard</span>
+                </button>
+              )}
 
               <button 
                 onClick={() => navigateTo("billing", "/billing")}
@@ -335,6 +535,17 @@ export default function RootLayout({
                 <Settings size={18} />
                 <span>Settings</span>
               </button>
+
+              {aiEnabled && (
+                <button 
+                  onClick={() => navigateTo("harikson", "/harikson")}
+                  className="btn" 
+                  style={{ justifyContent: "flex-start", width: "100%", background: activeTab === "harikson" ? "rgba(139, 92, 246, 0.15)" : "transparent", color: activeTab === "harikson" ? "#a78bfa" : "rgba(255,255,255,0.7)" }}
+                >
+                  <Zap size={18} />
+                  <span>AI Agents</span>
+                </button>
+              )}
             </nav>
 
             <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "20px" }}>

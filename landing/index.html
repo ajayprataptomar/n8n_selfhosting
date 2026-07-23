@@ -3,10 +3,88 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Neuravolt - Premium Managed n8n Hosting</title>
-  <meta name="description" content="Deploy isolated, secure, and production-ready n8n environments in seconds. High-performance managed n8n cloud hosting starting at just ₹999.">
+  <title>Neuravolt Cloud Platform - Managed n8n & Branded AI Agents</title>
+  <meta name="description" content="Host isolated, secure managed n8n workflow containers and deploy branded Harikson AI Agents with vector storage and adapter training capabilities.">
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; }
+    .product-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .badge-n8n { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.2); }
+    .badge-ai { background: rgba(139, 92, 246, 0.15); color: #c084fc; border: 1px solid rgba(139, 92, 246, 0.2); }
+    .badge-both { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.2); }
+    
+    .product-header-tab {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 40px;
+    }
+    .product-tab-btn {
+      padding: 10px 24px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .product-tab-btn.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      box-shadow: 0 4px 14px rgba(139, 92, 246, 0.3);
+    }
+    .comparison-section {
+      padding: 80px 0;
+      border-top: 1px solid var(--border);
+    }
+    .comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 30px;
+      font-size: 0.9rem;
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+    }
+    .comp-table th, .comp-table td {
+      padding: 16px 20px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    .comp-table th {
+      background: rgba(255, 255, 255, 0.02);
+      font-weight: 700;
+      color: #fff;
+    }
+    .comp-table td:first-child {
+      font-weight: 600;
+    }
+    .comp-table tr:hover {
+      background: rgba(255, 255, 255, 0.01);
+    }
+    .bundle-banner {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(59, 130, 246, 0.15) 100%);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      border-radius: 20px;
+      padding: 40px;
+      text-align: center;
+      margin-top: 60px;
+    }
+  </style>
 </head>
 <body>
 
@@ -18,8 +96,9 @@
         <span>Neuravolt</span>
       </a>
       <ul class="nav-links">
-        <li><a href="#features">Features</a></li>
-        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#features">Platform Features</a></li>
+        <li><a href="#pricing">Pricing Plans</a></li>
+        <li><a href="#compare">Comparison</a></li>
       </ul>
       <div class="nav-actions">
         <a href="https://app.neuravolt.cloud" class="btn btn-ghost">Login</a>
@@ -32,51 +111,47 @@
   <section class="hero container">
     <div class="badge">
       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      <span>Next-Gen Workflow Orchestration</span>
+      <span>Next-Gen Enterprise Cloud Tools</span>
     </div>
-    <h1>Ultra-Fast Managed<br>n8n Hosting</h1>
-    <p>Spin up fully isolated, dedicated, and secure n8n containers in seconds. Take control of your automations with real-time performance telemetry and automatic volume storage.</p>
+    <h1>Double Your Capability.<br>Automation & AI Agents.</h1>
+    <p>Build and scale enterprise workflows with managed n8n hosting, or deploy branded Harikson AI Agents with local vector databases, fine-tuning registries, and custom white-label interfaces.</p>
     <div class="hero-actions">
-      <a href="https://app.neuravolt.cloud" class="btn btn-primary">Deploy Container Now</a>
-      <a href="#pricing" class="btn btn-secondary">Explore Plans</a>
+      <a href="#pricing" class="btn btn-primary">Choose Your Offerings</a>
+      <a href="#compare" class="btn btn-secondary">Compare Solutions</a>
     </div>
   </section>
 
   <!-- Features Section -->
   <section id="features" class="features container">
     <div class="section-header">
-      <h2>Engineered for Performance & Scale</h2>
-      <p>Automate workflows at speed on dedicated resources with no shared limits.</p>
+      <h2>Two Distinct Engine Offerings</h2>
+      <p>Configure separate instances for workflow automation and AI task orchestration.</p>
     </div>
-    <div class="features-grid">
-      
-      <!-- Card 1 -->
-      <div class="glass-card feature-card">
-        <div class="feature-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-        </div>
-        <h3>Instant Provisioning</h3>
-        <p>Your n8n container spawns instantly under a dedicated secure subdomain (`name.neuravolt.cloud`) as soon as your account is approved.</p>
+    
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 40px;">
+      <!-- n8n Features -->
+      <div class="glass-card" style="border-color: rgba(239, 68, 68, 0.15)">
+        <span class="product-badge badge-n8n">Product A</span>
+        <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: #f87171;">n8n Automation Engine</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px;">Deploy dedicated, isolated managed n8n containers in seconds. Run custom JavaScript/Python nodes with unlimited monthly workflow limits.</p>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem; color: var(--text-muted);">
+          <li style="display: flex; gap: 8px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 1-Click isolated container provisioning</li>
+          <li style="display: flex; gap: 8px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Persistent SSD data volume mapping</li>
+          <li style="display: flex; gap: 8px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Real-time CPU, RAM, & Storage telemetry</li>
+        </ul>
       </div>
 
-      <!-- Card 2 -->
-      <div class="glass-card feature-card">
-        <div class="feature-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
-        </div>
-        <h3>Dedicated CPU & RAM</h3>
-        <p>No noisy neighbors. Your n8n workload runs in an isolated sandbox with dedicated resource limits to ensure flawless workflow execution.</p>
+      <!-- AI Agents Features -->
+      <div class="glass-card" style="border-color: rgba(139, 92, 246, 0.15)">
+        <span class="product-badge badge-ai">Product B</span>
+        <h3 style="font-size: 1.5rem; margin-bottom: 15px; color: #a78bfa;">Harikson AI Agents Core</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px;">Deploy dedicated Ollama AI clusters loaded with your custom parameters. Enable white-label chat widgets, vector index stores (RAG), and QLoRA fine-tuning epochs.</p>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem; color: var(--text-muted);">
+          <li style="display: flex; gap: 8px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Branded AI agent model configurations</li>
+          <li style="display: flex; gap: 8px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> QLoRA custom model adapter builder</li>
+          <li style="display: flex; gap: 8px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Knowledge base RAG file upload & indexing</li>
+        </ul>
       </div>
-
-      <!-- Card 3 -->
-      <div class="glass-card feature-card">
-        <div class="feature-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        </div>
-        <h3>Automated Backups</h3>
-        <p>Your n8n database resides on persistent storage volumes (`nv-instance-data`) with nightly snapshots to prevent any loss of database workflows.</p>
-      </div>
-
     </div>
   </section>
 
@@ -84,105 +159,217 @@
   <section id="pricing" class="pricing">
     <div class="container">
       <div class="section-header">
-        <h2>Simple, Transparent Pricing</h2>
-        <p>Pick a container tier that matches your monthly workflow executions.</p>
+        <h2>Flexible Pricing Tiers</h2>
+        <p>Choose the individual plan that fits your current operational scale.</p>
       </div>
-      <div class="pricing-grid">
-        
-        <!-- Basic -->
+
+      <div class="product-header-tab">
+        <button id="btn-show-n8n" class="product-tab-btn active" onclick="switchPricing('n8n')">n8n Automation Pricing</button>
+        <button id="btn-show-ai" class="product-tab-btn" onclick="switchPricing('ai')">AI Agents Pricing</button>
+      </div>
+
+      <!-- n8n Pricing Grid -->
+      <div id="grid-n8n" class="pricing-grid">
+        <!-- Starter n8n -->
         <div class="glass-card price-card">
           <div class="price-header">
-            <h3>Basic Tier</h3>
-            <p>Perfect for personal automation and small integrations.</p>
+            <span class="product-badge badge-n8n">n8n STARTER</span>
+            <h3>Starter Automation</h3>
+            <p>Perfect for light workflows and basic business automation.</p>
           </div>
-          <div class="price-amount">₹999<span>/mo</span></div>
+          <div class="price-amount">₹2,499<span>/mo</span></div>
           <ul class="price-features">
-            <li>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              <span>0.5 Dedicated CPU Core</span>
-            </li>
-            <li>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              <span>512 MB High-speed RAM</span>
-            </li>
-            <li>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              <span>10 GB SSD Persistent Storage</span>
-            </li>
-            <li>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              <span>Standard SSL Subdomain</span>
-            </li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 0.5 CPU Allocation</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 512 MB High-speed RAM</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 10 GB Persistent Storage</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Standard SSL subdomain</li>
           </ul>
-          <a href="https://app.neuravolt.cloud" class="btn btn-secondary">Get Started</a>
+          <a href="https://app.neuravolt.cloud/?product=n8n" class="btn btn-secondary" style="border-color: rgba(239, 68, 68, 0.3)">Buy n8n Only</a>
         </div>
 
-        <!-- Pro -->
+        <!-- Pro n8n -->
+        <div class="glass-card price-card featured" style="border-color: rgba(239, 68, 68, 0.4)">
+          <div class="price-header">
+            <span class="product-badge badge-n8n">n8n PRO</span>
+            <h3>Pro Automation</h3>
+            <p>Optimized for scaling teams and mid-size web platforms.</p>
+          </div>
+          <div class="price-amount">₹4,999<span>/mo</span></div>
+          <ul class="price-features">
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 1.0 CPU Allocation</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 1024 MB RAM Limit</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 25 GB Persistent Storage</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Custom Domain Mapping</li>
+          </ul>
+          <a href="https://app.neuravolt.cloud/?product=n8n" class="btn btn-primary" style="background: #ef4444; border-color: #ef4444; box-shadow: 0 4px 14px rgba(239, 68, 68, 0.3)">Buy n8n Only</a>
+        </div>
+
+        <!-- Business n8n -->
+        <div class="glass-card price-card">
+          <div class="price-header">
+            <span class="product-badge badge-n8n">n8n BUSINESS</span>
+            <h3>Business Automation</h3>
+            <p>Built for highly critical automations and enterprise workloads.</p>
+          </div>
+          <div class="price-amount">₹10,999<span>/mo</span></div>
+          <ul class="price-features">
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 2.0 CPU Allocation</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 2048 MB RAM Limit</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 50 GB Persistent Storage</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 24/7 Priority Support SLAs</li>
+          </ul>
+          <a href="https://app.neuravolt.cloud/?product=n8n" class="btn btn-secondary" style="border-color: rgba(239, 68, 68, 0.3)">Buy n8n Only</a>
+        </div>
+      </div>
+
+      <!-- AI Agents Pricing Grid -->
+      <div id="grid-ai" class="pricing-grid" style="display: none;">
+        <!-- Starter AI -->
+        <div class="glass-card price-card">
+          <div class="price-header">
+            <span class="product-badge badge-ai">AI STARTER</span>
+            <h3>Starter Agent Core</h3>
+            <p>Deploy lightweight branded models on secure isolated servers.</p>
+          </div>
+          <div class="price-amount">₹2,499<span>/mo</span></div>
+          <ul class="price-features">
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 8 GB VPS Core RAM Allocation</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 3-8B Parameter Models support</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Custom chat widget embed</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 5 RAG Document Indexes</li>
+          </ul>
+          <a href="https://app.neuravolt.cloud/?product=ai" class="btn btn-secondary">Buy AI Agents Only</a>
+        </div>
+
+        <!-- Pro AI -->
         <div class="glass-card price-card featured">
           <div class="price-header">
-            <h3>Pro Tier</h3>
-            <p>Optimized for growing systems and active team tasks.</p>
+            <span class="product-badge badge-ai">AI PRO</span>
+            <h3>Pro Agent Core</h3>
+            <p>Power your business dashboard with large 9-16B parameter models.</p>
           </div>
-          <div class="price-amount">₹1,999<span>/mo</span></div>
+          <div class="price-amount">₹4,999<span>/mo</span></div>
           <ul class="price-features">
-            <li>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              <span>1.0 Dedicated CPU Core</span>
-            </li>
-            <li>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              <span>1024 MB High-speed RAM</span>
-            </li>
-            <li>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              <span>25 GB SSD Persistent Storage</span>
-            </li>
-            <li>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              <span>Custom Domain Mapping</span>
-            </li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 12 GB VPS Core RAM Allocation</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 9-16B Parameter Models support</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 25 RAG Document Indexes</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Adapter tuning epoch logs</li>
           </ul>
-          <a href="https://app.neuravolt.cloud" class="btn btn-primary">Deploy Pro Node</a>
+          <a href="https://app.neuravolt.cloud/?product=ai" class="btn btn-primary">Buy AI Agents Only</a>
         </div>
 
-        <!-- Heavy -->
+        <!-- Business AI -->
         <div class="glass-card price-card">
           <div class="price-header">
-            <h3>Heavy Tier</h3>
-            <p>Designed for heavy automation workloads and enterprise nodes.</p>
+            <span class="product-badge badge-ai">AI BUSINESS</span>
+            <h3>Business Agent Core</h3>
+            <p>Maximum scale AI models with priority QLoRA training servers.</p>
           </div>
-          <div class="price-amount">₹3,999<span>/mo</span></div>
+          <div class="price-amount">₹10,999<span>/mo</span></div>
           <ul class="price-features">
-            <li>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              <span>2.0 Dedicated CPU Core</span>
-            </li>
-            <li>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              <span>2048 MB High-speed RAM</span>
-            </li>
-            <li>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              <span>50 GB SSD Persistent Storage</span>
-            </li>
-            <li>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              <span>Priority Support & Backups</span>
-            </li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 16-24 GB VPS RAM Allocation</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Large 30B+ Parameter models</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Unlimited vector store documents</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Multi-agent hybrid connections</li>
           </ul>
-          <a href="https://app.neuravolt.cloud" class="btn btn-secondary">Deploy Heavy Node</a>
+          <a href="https://app.neuravolt.cloud/?product=ai" class="btn btn-secondary">Buy AI Agents Only</a>
         </div>
-
       </div>
+
+      <!-- Combo Bundle Offer -->
+      <div class="bundle-banner">
+        <span class="product-badge badge-both">Bundle Suite Offer</span>
+        <h3 style="font-size: 1.6rem; color: #34d399; margin-bottom: 10px;">Run Automation & AI Together</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem; max-width: 600px; margin: 0 auto 20px;">
+          Unlock n8n automation and Harikson AI Agents under a single dashboard. Merge entitlements with one login.
+        </p>
+        <a href="https://app.neuravolt.cloud/?product=both" class="btn btn-primary" style="background: linear-gradient(135deg, #10b981, #8b5cf6); border: none; box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3)">
+          Purchase Combined Suite (Unlock Both)
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Comparison Matrix Section -->
+  <section id="compare" class="comparison-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Comparative Product Matrix</h2>
+        <p>Evaluate the detailed feature differences between our two core engine products.</p>
+      </div>
+
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Platform Metric</th>
+            <th>n8n Automation Hosting</th>
+            <th>Harikson AI Agents Core</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Primary Workload</td>
+            <td>Webhook listeners, API calls, JS/Python automation pipelines</td>
+            <td>Natural language chat agents, vector RAG search, LLM completion</td>
+          </tr>
+          <tr>
+            <td>Underlying Engines</td>
+            <td>Managed n8n Node server instances</td>
+            <td>Isolated Ollama host cluster servers</td>
+          </tr>
+          <tr>
+            <td>Active Storage</td>
+            <td>10GB to 50GB SSD database volumes</td>
+            <td>Vector Database index storage (ChromaDB pool)</td>
+          </tr>
+          <tr>
+            <td>Developer APIs</td>
+            <td>n8n Webhooks & native JSON builders</td>
+            <td>Chat widgets, embed scripts & REST completion APIs</td>
+          </tr>
+          <tr>
+            <td>Fine-Tuning support</td>
+            <td>No (Script based data handling)</td>
+            <td>Yes (QLoRA adapters with training epoch visualizer)</td>
+          </tr>
+          <tr>
+            <td>White-Label widgets</td>
+            <td>No (Access via subdomain dashboard)</td>
+            <td>Yes (Customize display name, logo & hex colors)</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </section>
 
   <!-- Footer -->
   <footer>
     <div class="container">
-      <p>&copy; 2026 Neuravolt. All rights reserved.</p>
+      <p>&copy; 2026 Neuravolt Cloud. All rights reserved.</p>
     </div>
   </footer>
+
+  <script>
+    function switchPricing(product) {
+      const btnN8n = document.getElementById('btn-show-n8n');
+      const btnAi = document.getElementById('btn-show-ai');
+      const gridN8n = document.getElementById('grid-n8n');
+      const gridAi = document.getElementById('grid-ai');
+
+      if (product === 'n8n') {
+        btnN8n.classList.add('active');
+        btnAi.classList.remove('active');
+        gridN8n.style.display = 'grid';
+        gridAi.style.display = 'none';
+      } else {
+        btnAi.classList.add('active');
+        btnN8n.classList.remove('active');
+        gridAi.style.display = 'grid';
+        gridN8n.style.display = 'none';
+      }
+    }
+  </script>
 
 </body>
 </html>

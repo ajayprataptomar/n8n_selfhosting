@@ -15,9 +15,15 @@ model User {
   company       String?
   status        UserStatus @default(PENDING)
   role          UserRole   @default(USER)
-  plan          Plan       @default(BASIC)
+  plan          Plan       @default(STARTER)
+  aiPlan        Plan       @default(STARTER)
   createdAt     DateTime   @default(now())
   updatedAt     DateTime   @updatedAt
+
+  agentType     AgentType  @default(CHAT)
+  model         String     @default("harikson-chat-8b")
+  n8nEnabled    Boolean    @default(true)
+  aiEnabled     Boolean    @default(false)
   
   // Relations
   instances     Instance[]
@@ -52,19 +58,85 @@ model Instance {
   memoryLimit   String   @default("512m")
   storageLimit  String   @default("10GB")
   
-  // Apps deployed
-  apps          Json     @default("[]") // ["n8n", "openwebui"]
+  // Apps deployed (legacy/compatibility, defaults to ["agent-chat"])
+  apps          Json     @default("[]") 
   
+  agentType     AgentType      @default(CHAT)
+  model         String         @default("qwen3-coder-8b")
+  whiteLabelSettings Json?     // Custom logo, colors, welcome message, etc.
+
   // Metrics (cached)
   cpuUsage      Float?
   memoryUsage   Float?
   diskUsage     String?
   lastBackup    DateTime?
   
+  // Relations
+  documents     Document[]
+  fineTuning    FineTuneJob[]
+  leads         CapturedLead[]
+  validationLogs ValidationLog[]
+
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
   
   @@map("instances")
+}
+
+model Document {
+  id         String    @id @default(cuid())
+  instanceId String
+  instance   Instance  @relation(fields: [instanceId], references: [id], onDelete: Cascade)
+  name       String
+  type       String    // PDF, DOCX, URL, CODEBASE
+  size       Int?
+  url        String?
+  status     String    // PROCESSING, INDEXED, ERROR
+  createdAt  DateTime  @default(now())
+
+  @@map("documents")
+}
+
+model FineTuneJob {
+  id         String    @id @default(cuid())
+  instanceId String
+  instance   Instance  @relation(fields: [instanceId], references: [id], onDelete: Cascade)
+  status     String    // QUEUED, TRAINING, COMPLETED, FAILED
+  baseModel  String
+  adapterName String?
+  metrics    Json?     // Loss curve checkpoints
+  createdAt  DateTime  @default(now())
+  completedAt DateTime?
+
+  @@map("fine_tune_jobs")
+}
+
+model CapturedLead {
+  id         String    @id @default(cuid())
+  instanceId String
+  instance   Instance  @relation(fields: [instanceId], references: [id], onDelete: Cascade)
+  email      String?
+  phone      String?
+  name       String?
+  metadata   Json?     // Custom fields captured during chat
+  createdAt  DateTime  @default(now())
+
+  @@map("captured_leads")
+}
+
+model ValidationLog {
+  id         String    @id @default(cuid())
+  instanceId String
+  instance   Instance  @relation(fields: [instanceId], references: [id], onDelete: Cascade)
+  type       String    // CHAT or CODE
+  input      String
+  output     String
+  score      Float
+  status     String    // APPROVED, REVIEW, DISCARDED
+  reason     String?
+  createdAt  DateTime  @default(now())
+
+  @@map("validation_logs")
 }
 
 model Invoice {
@@ -110,10 +182,16 @@ enum UserRole {
 }
 
 enum Plan {
-  LITE
-  BASIC
+  STARTER
   PRO
-  HEAVY
+  BUSINESS
+  ENTERPRISE
+}
+
+enum AgentType {
+  CHAT
+  CODING
+  HYBRID
 }
 
 enum InstanceStatus {
@@ -130,3 +208,11 @@ enum InvoiceStatus {
   OVERDUE
   CANCELLED
 }
+
+enum InvoiceStatus_legacy {
+  PENDING
+  PAID
+  OVERDUE
+  CANCELLED
+}
+

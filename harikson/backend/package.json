@@ -1,0 +1,40 @@
+{
+  "name": "harikson-backend",
+  "version": "1.0.0",
+  "description": "Neuravolt-Harikson Admin API Control Plane",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx watch src/index.ts",
+    "db:migrate": "dotenv -e .env prisma migrate dev --schema=prisma/schema.prisma",
+    "db:push": "dotenv -e .env prisma db push --schema=prisma/schema.prisma",
+    "db:generate": "prisma generate --schema=prisma/schema.prisma"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.14.0",
+    "bullmq": "^5.8.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "dotenv-cli": "^7.4.2",
+    "express": "^4.19.2",
+    "express-rate-limit": "^8.5.2",
+    "helmet": "^8.2.0",
+    "hpp": "^0.2.3",
+    "jsonwebtoken": "^9.0.2",
+    "razorpay": "^2.9.6",
+    "redis": "^4.6.14",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/hpp": "^0.2.7",
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/node": "^20.12.12",
+    "prisma": "^5.14.0",
+    "tsx": "^4.11.0",
+    "typescript": "^5.4.5"
+  }
+}

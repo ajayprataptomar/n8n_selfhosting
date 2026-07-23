@@ -21,7 +21,7 @@ const manualCreateSchema = z.object({
   body: z.object({
     userId: z.string(),
     name: z.string().min(2),
-    plan: z.enum(["LITE", "BASIC", "PRO", "HEAVY"]),
+    plan: z.enum(["STARTER", "PRO", "BUSINESS", "ENTERPRISE"]),
     apps: z.array(z.string()).default(["n8n"]),
   }),
 });
@@ -75,6 +75,8 @@ router.post("/", adminMiddleware, validate(manualCreateSchema), async (req: Auth
         memoryLimit: memory,
         storageLimit: storage,
         apps,
+        agentType: user.agentType,
+        model: user.model,
       },
     });
 

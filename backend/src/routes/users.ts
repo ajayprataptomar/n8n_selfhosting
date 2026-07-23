@@ -52,8 +52,13 @@ router.patch("/:id/approve", adminMiddleware, async (req: AuthenticatedRequest, 
       // Clean name from email
       const safeName = user.email.split("@")[0].replace(/[^a-zA-Z0-9]/g, "").toLowerCase();
       
+      // Map apps based on entitlements
+      const apps: string[] = [];
+      if (user.n8nEnabled) apps.push("n8n");
+      if (user.aiEnabled) apps.push("openwebui");
+      
       // Auto-deploy instance
-      const containerInfo = await DockerService.createInstance(safeName, user.plan, ["n8n", "openwebui"]);
+      const containerInfo = await DockerService.createInstance(safeName, user.plan, apps);
       
       instance = await prisma.instance.create({
         data: {
@@ -62,10 +67,12 @@ router.patch("/:id/approve", adminMiddleware, async (req: AuthenticatedRequest, 
           domain: containerInfo.domain,
           containerId: containerInfo.containerId,
           status: "RUNNING",
-          cpuLimit: user.plan === "HEAVY" ? 2.0 : user.plan === "PRO" ? 1.0 : 0.5,
-          memoryLimit: user.plan === "HEAVY" ? "2048m" : user.plan === "PRO" ? "1024m" : "512m",
-          storageLimit: user.plan === "HEAVY" ? "50GB" : user.plan === "PRO" ? "25GB" : "10GB",
-          apps: ["n8n", "openwebui"],
+          cpuLimit: user.plan === "BUSINESS" ? 2.0 : user.plan === "PRO" ? 1.0 : 0.5,
+          memoryLimit: user.plan === "BUSINESS" ? "2048m" : user.plan === "PRO" ? "1024m" : "512m",
+          storageLimit: user.plan === "BUSINESS" ? "50GB" : user.plan === "PRO" ? "25GB" : "10GB",
+          apps: apps,
+          agentType: user.agentType,
+          model: user.model,
         },
       });
     } else {

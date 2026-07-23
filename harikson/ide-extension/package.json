@@ -1,0 +1,60 @@
+{
+  "name": "neuravolt-agent-vscode",
+  "displayName": "Neuravolt AI Agent Assistant",
+  "description": "Ghost text autocompletions and coding sidebar assistance powered by Neuravolt-Harikson.",
+  "version": "1.0.0",
+  "publisher": "neuravolt",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Machine Learning"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "Neuravolt AI",
+      "properties": {
+        "neuravolt.agentUrl": {
+          "type": "string",
+          "default": "http://localhost:6000",
+          "description": "Isolated IDE Bridge agent socket endpoint."
+        },
+        "neuravolt.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Your Neuravolt instance api access key."
+        }
+      }
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "neuravolt-sidebar",
+          "title": "Neuravolt AI",
+          "icon": "resources/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "neuravolt-sidebar": [
+        {
+          "type": "webview",
+          "id": "neuravolt-chat-view",
+          "name": "Agent Chat Console"
+        }
+      ]
+    }
+  },
+  "dependencies": {
+    "socket.io-client": "^4.7.5"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.80.0",
+    "typescript": "^5.4.5"
+  }
+}

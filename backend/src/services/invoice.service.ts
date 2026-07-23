@@ -4,10 +4,10 @@ import { EmailService } from "./email.service.js";
 export class InvoiceService {
   // Configured costs per plan tier
   private static planPricing: Record<string, number> = {
-    LITE: 499.00,
-    BASIC: 999.00,
+    STARTER: 999.00,
     PRO: 1999.00,
-    HEAVY: 3999.00,
+    BUSINESS: 3999.00,
+    ENTERPRISE: 9999.00,
   };
 
   static async generateInvoice(userId: string): Promise<any> {

@@ -44,6 +44,7 @@ export default function RootLayout({
       else if (path.includes("/instances")) setActiveTab("instances");
       else if (path.includes("/billing")) setActiveTab("billing");
       else if (path.includes("/monitoring")) setActiveTab("monitoring");
+      else if (path.includes("/harikson")) setActiveTab("harikson");
       else setActiveTab("dashboard");
     }
   }, []);
@@ -218,6 +219,15 @@ export default function RootLayout({
               >
                 <Activity size={18} />
                 <span>Monitoring</span>
+              </button>
+
+              <button 
+                onClick={() => navigateTo("harikson", "/harikson")}
+                className="btn" 
+                style={{ justifyContent: "flex-start", width: "100%", background: activeTab === "harikson" ? "rgba(139, 92, 246, 0.15)" : "transparent", color: activeTab === "harikson" ? "#a78bfa" : "rgba(255,255,255,0.7)" }}
+              >
+                <Zap size={18} />
+                <span>AI Agents Control</span>
               </button>
             </nav>
 

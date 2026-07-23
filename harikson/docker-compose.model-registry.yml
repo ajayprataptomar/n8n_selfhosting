@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  model-registry:
+    image: registry:2
+    container_name: harikson-model-registry
+    ports:
+      - '5001:5000'
+    environment:
+      REGISTRY_STORAGE: filesystem
+      REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY: /var/lib/registry
+      REGISTRY_AUTH: htpasswd
+      REGISTRY_AUTH_HTPASSWD_REALM: 'Harikson Model Registry'
+      REGISTRY_AUTH_HTPASSWD_PATH: /auth/htpasswd
+    volumes:
+      - ./registry-auth:/auth
+      - model-registry-data:/var/lib/registry
+    networks:
+      - harikson-internal
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.5'
+
+  model-builder:
+    image: harikson/model-builder:latest
+    container_name: harikson-model-builder
+    environment:
+      - HF_TOKEN=${HUGGINGFACE_TOKEN}
+      - REGISTRY_URL=http://model-registry:5000
+      - REGISTRY_USER=harikson
+      - REGISTRY_PASS=${REGISTRY_PASSWORD}
+      - SIGNING_KEY=${MODEL_SIGNING_KEY}
+    volumes:
+      - /shared/models:/models
+      - model-build-cache:/cache
+    networks:
+      - harikson-internal
+    deploy:
+      resources:
+        limits:
+          memory: 8G
+          cpus: '4.0'
+
+volumes:
+  model-registry-data:
+  model-build-cache:
+
+networks:
+  harikson-internal:
+    external: true

@@ -1,0 +1,299 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Harikson AI SaaS Platform API",
+    "description": "Comprehensive developer and tenant API documentation for Harikson AI SaaS Platform.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Local Tenant API service"
+    },
+    {
+      "url": "https://api.neuravolt.cloud",
+      "description": "Production API endpoint"
+    }
+  ],
+  "paths": {
+    "/api/v1/auth/register": {
+      "post": {
+        "summary": "Register a new tenant user",
+        "description": "Creates a user account under the active tenant context.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "email",
+                  "password"
+                ],
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "password": {
+                    "type": "string",
+                    "minLength": 12
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User successfully registered"
+          },
+          "400": {
+            "description": "Validation error (e.g. weak password)"
+          },
+          "403": {
+            "description": "Domain / Slug mapping forbidden"
+          }
+        }
+      }
+    },
+    "/api/v1/auth/login": {
+      "post": {
+        "summary": "Authenticate user credentials",
+        "description": "Authenticates user and issues httpOnly session cookies (access & refresh tokens).",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "email",
+                  "password"
+                ],
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login successful"
+          },
+          "401": {
+            "description": "Invalid credentials"
+          }
+        }
+      }
+    },
+    "/api/v1/auth/forgot-password": {
+      "post": {
+        "summary": "Request a password reset link",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "email"
+                ],
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Reset email dispatched"
+          }
+        }
+      }
+    },
+    "/api/v1/auth/reset-password": {
+      "post": {
+        "summary": "Reset password using token",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "token",
+                  "email",
+                  "password"
+                ],
+                "properties": {
+                  "token": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "password": {
+                    "type": "string",
+                    "minLength": 12
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Password updated successfully"
+          }
+        }
+      }
+    },
+    "/api/v1/auth/refresh": {
+      "post": {
+        "summary": "Rotate access token using refresh token",
+        "responses": {
+          "200": {
+            "description": "Tokens rotated"
+          },
+          "401": {
+            "description": "Refresh token expired or invalid"
+          }
+        }
+      }
+    },
+    "/api/v1/chat": {
+      "post": {
+        "summary": "Send a chat message",
+        "description": "Dispatches prompt to AI models. Natively supports streaming responses.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "message"
+                ],
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  },
+                  "model": {
+                    "type": "string"
+                  },
+                  "agentId": {
+                    "type": "string"
+                  },
+                  "deepSearch": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Chunked SSE generated token stream"
+          },
+          "403": {
+            "description": "Quota limit reached"
+          }
+        }
+      }
+    },
+    "/api/v1/chat/history": {
+      "get": {
+        "summary": "List conversation histories",
+        "responses": {
+          "200": {
+            "description": "List of active conversations"
+          }
+        }
+      }
+    },
+    "/api/v1/billing": {
+      "get": {
+        "summary": "Retrieve tenant billing stats",
+        "responses": {
+          "200": {
+            "description": "Billing plans and current active balances"
+          }
+        }
+      }
+    },
+    "/api/v1/billing/invoices": {
+      "get": {
+        "summary": "Retrieve invoice list",
+        "responses": {
+          "200": {
+            "description": "Invoice list history"
+          }
+        }
+      }
+    },
+    "/v1/admin/tenants": {
+      "get": {
+        "summary": "List all tenants (Admin)",
+        "responses": {
+          "200": {
+            "description": "Tenant catalog"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new tenant (Admin)",
+        "responses": {
+          "201": {
+            "description": "Tenant created"
+          }
+        }
+      }
+    },
+    "/v1/admin/users": {
+      "get": {
+        "summary": "List users (Admin)",
+        "responses": {
+          "200": {
+            "description": "User directory"
+          }
+        }
+      }
+    },
+    "/v1/admin/plans": {
+      "get": {
+        "summary": "List subscription plans (Admin)",
+        "responses": {
+          "200": {
+            "description": "Subscription plans list"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "cookieAuth": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "hk_access_token"
+      }
+    }
+  }
+}

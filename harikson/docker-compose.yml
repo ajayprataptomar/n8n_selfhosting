@@ -1,0 +1,42 @@
+version: '3.8'
+
+networks:
+  harikson-internal:
+    driver: bridge
+    internal: true # Prevent external incoming connections
+  harikson-proxy:
+    driver: bridge
+
+services:
+  harikson-postgres:
+    image: pgvector/pgvector:pg16
+    container_name: harikson-postgres
+    restart: unless-stopped
+    ports:
+      - '5433:5432'
+    networks:
+      - harikson-internal
+      - harikson-proxy
+    environment:
+      POSTGRES_DB: neuravolt
+      POSTGRES_USER: neuravolt
+      POSTGRES_PASSWORD: neuravolt_secure_password_2026
+    volumes:
+      - harikson-postgres-data:/var/lib/postgresql/data
+
+  harikson-redis:
+    image: redis:7-alpine
+    container_name: harikson-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    ports:
+      - '6380:6379'
+    networks:
+      - harikson-internal
+      - harikson-proxy
+    volumes:
+      - harikson-redis-data:/data
+
+volumes:
+  harikson-postgres-data:
+  harikson-redis-data:

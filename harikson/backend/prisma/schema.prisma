@@ -1,0 +1,491 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Tenant {
+  id        String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  name      String   @db.VarChar(255)
+  slug      String   @unique @db.VarChar(255)
+  plan      String   @db.VarChar(50)
+  status    String   @default("active") @db.VarChar(50)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime @default(now()) @map("updated_at") @db.Timestamptz
+
+  users               User[]
+  conversations       Conversation[]
+  messages            Message[]
+  subscriptions       Subscription[]
+  invoices            Invoice[]
+  passwordResetTokens PasswordResetToken[]
+  activityLogs        ActivityLog[]
+  userSessions        UserSession[]
+  apiKeys             ApiKey[]
+  agents              Agent[]
+  knowledgeBases      KnowledgeBase[]
+  knowledgeDocuments  KnowledgeDocument[]
+  aiActivities        AiActivity[]
+  workflows           Workflow[]
+  workflowExecutions  WorkflowExecution[]
+  notifications       Notification[]
+  integrations        Integration[]
+  vectorCollections   VectorCollection[]
+  backups             Backup[]
+  playgroundSessions  PlaygroundSession[]
+
+  @@map("tenants")
+}
+
+model User {
+  id           String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  tenantId     String   @map("tenant_id") @db.Uuid
+  tenant       Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  email        String   @db.VarChar(255)
+  passwordHash String   @map("password_hash") @db.VarChar(255)
+  role         String   @default("user") @db.VarChar(50)
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt    DateTime @default(now()) @map("updated_at") @db.Timestamptz
+  twoFactorSecret      String?  @map("two_factor_secret") @db.Text
+  twoFactorEnabled     Boolean  @default(false) @map("two_factor_enabled")
+  twoFactorBackupCodes String[] @default([]) @map("two_factor_backup_codes")
+
+  conversations       Conversation[]
+  passwordResetTokens PasswordResetToken[]
+  activityLogs        ActivityLog[]
+  userSessions        UserSession[]
+  apiKeys             ApiKey[]
+  agents              Agent[]
+  notifications       Notification[]
+  playgroundSessions  PlaygroundSession[]
+  KnowledgeDocument   KnowledgeDocument[]
+
+  @@unique([tenantId, email], name: "unique_tenant_email")
+  @@map("users")
+}
+
+model Conversation {
+  id        String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  tenantId  String    @map("tenant_id") @db.Uuid
+  tenant    Tenant    @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  userId    String    @map("user_id") @db.Uuid
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String    @db.VarChar(255)
+  model     String    @db.VarChar(255)
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime  @default(now()) @map("updated_at") @db.Timestamptz
+  deletedAt DateTime? @map("deleted_at") @db.Timestamptz
+
+  messages Message[]
+
+  @@map("conversations")
+}
+
+model Message {
+  id             String       @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  tenantId       String       @map("tenant_id") @db.Uuid
+  tenant         Tenant       @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  conversationId String       @map("conversation_id") @db.Uuid
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  role           String       @db.VarChar(50)
+  content        String
+  tokensUsed     Int          @default(0) @map("tokens_used")
+  createdAt      DateTime     @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt      DateTime     @default(now()) @map("updated_at") @db.Timestamptz
+  deletedAt      DateTime?    @map("deleted_at") @db.Timestamptz
+
+  @@map("messages")
+}
+
+model Plan {
+  id            String   @id @db.VarChar(50)
+  name          String   @db.VarChar(255)
+  tier          String   @db.VarChar(50)
+  price         Decimal  @default(0.00) @db.Decimal(10, 2)
+  billing       String   @default("monthly") @db.VarChar(50)
+  currency      String   @default("INR") @db.VarChar(10)
+  isActive      Boolean  @default(true) @map("is_active")
+  isRecommended Boolean  @default(false) @map("is_recommended")
+  tokenLimit    Int      @default(-1) @map("token_limit")
+  tenantLimit   Int      @default(-1) @map("tenant_limit")
+  agentLimit    Int      @default(-1) @map("agent_limit")
+  modelAccess   String[] @map("model_access")
+  features      Json     @default("{}")
+  description   String?
+  createdAt     DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  subscriptions Subscription[]
+
+  @@map("plans")
+}
+
+model Subscription {
+  id                     String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  tenantId               String    @map("tenant_id") @db.Uuid
+  tenant                 Tenant    @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  provider               String    @db.VarChar(50)
+  providerSubscriptionId String    @map("provider_subscription_id") @db.VarChar(255)
+  planId                 String    @map("plan_id") @db.VarChar(50)
+  plan                   Plan      @relation(fields: [planId], references: [id])
+  status                 String    @db.VarChar(50)
+  currentPeriodStart     DateTime? @map("current_period_start") @db.Timestamptz
+  currentPeriodEnd       DateTime? @map("current_period_end") @db.Timestamptz
+  amount                 Decimal?  @db.Decimal
+  currency               String?   @db.VarChar(50)
+  metadata               Json?
+  createdAt              DateTime  @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt              DateTime  @default(now()) @map("updated_at") @db.Timestamptz
+
+  invoices Invoice[]
+
+  @@unique([provider, providerSubscriptionId], name: "unique_provider_subscription")
+  @@map("subscriptions")
+}
+
+model Invoice {
+  id                String        @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  tenantId          String        @map("tenant_id") @db.Uuid
+  tenant            Tenant        @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  subscriptionId    String?       @map("subscription_id") @db.Uuid
+  subscription      Subscription? @relation(fields: [subscriptionId], references: [id], onDelete: SetNull)
+  provider          String        @db.VarChar(50)
+  providerInvoiceId String        @map("provider_invoice_id") @db.VarChar(255)
+  amount            Decimal?      @db.Decimal
+  currency          String?       @db.VarChar(50)
+  status            String        @db.VarChar(50)
+  paidAt            DateTime?     @map("paid_at") @db.Timestamptz
+  invoiceUrl        String?       @map("invoice_url")
+  pdfUrl            String?       @map("pdf_url")
+  createdAt         DateTime      @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt         DateTime      @default(now()) @map("updated_at") @db.Timestamptz
+
+  @@unique([provider, providerInvoiceId], name: "unique_provider_invoice")
+  @@map("invoices")
+}
+
+model PasswordResetToken {
+  id        String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  tenantId  String    @map("tenant_id") @db.Uuid
+  tenant    Tenant    @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  userId    String    @map("user_id") @db.Uuid
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tokenHash String    @unique @map("token_hash") @db.VarChar(255)
+  expiresAt DateTime  @map("expires_at") @db.Timestamptz
+  usedAt    DateTime? @map("used_at") @db.Timestamptz
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz
+
+  @@map("password_reset_tokens")
+}
+
+model ActivityLog {
+  id        String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  userId    String   @map("user_id") @db.Uuid
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tenantId  String   @map("tenant_id") @db.Uuid
+  tenant    Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  action    String   @db.VarChar(255)
+  metadata  Json     @default("{}")
+  ipAddress String?  @map("ip_address") @db.VarChar(45)
+  userAgent String?  @map("user_agent")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  @@map("activity_logs")
+}
+
+model UserSession {
+  id           String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  userId       String    @map("user_id") @db.Uuid
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tenantId     String    @map("tenant_id") @db.Uuid
+  tenant       Tenant    @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  deviceName   String?   @map("device_name") @db.VarChar(255)
+  ipAddress    String?   @map("ip_address") @db.VarChar(45)
+  userAgent    String?   @map("user_agent")
+  createdAt    DateTime  @default(now()) @map("created_at") @db.Timestamptz
+  expiresAt    DateTime  @map("expires_at") @db.Timestamptz
+  revokedAt    DateTime? @map("revoked_at") @db.Timestamptz
+  lastActiveAt DateTime  @default(now()) @map("last_active_at") @db.Timestamptz
+  updatedAt    DateTime  @default(now()) @map("updated_at") @db.Timestamptz
+
+  @@map("user_sessions")
+}
+
+model ApiKey {
+  id         String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  userId     String    @map("user_id") @db.Uuid
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tenantId   String    @map("tenant_id") @db.Uuid
+  tenant     Tenant    @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  name       String    @db.VarChar(255)
+  keyHash    String    @unique @map("key_hash") @db.VarChar(255)
+  keyPrefix  String    @map("key_prefix") @db.VarChar(16)
+  scopes     Json      @default("[]")
+  createdAt  DateTime  @default(now()) @map("created_at") @db.Timestamptz
+  lastUsedAt DateTime? @map("last_used_at") @db.Timestamptz
+  revokedAt  DateTime? @map("revoked_at") @db.Timestamptz
+  expiresAt  DateTime? @map("expires_at") @db.Timestamptz
+  updatedAt  DateTime  @default(now()) @map("updated_at") @db.Timestamptz
+
+  @@map("api_keys")
+}
+
+model Agent {
+  id                    String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tenantId              String?   @map("tenant_id") @db.Uuid
+  tenant                Tenant?   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  name                  String
+  description           String?
+  category              String?
+  version               String?   @default("1.0")
+  ownerId               String?   @map("owner_id") @db.Uuid
+  user                  User?     @relation(fields: [ownerId], references: [id], onDelete: SetNull)
+  status                String?   @default("active")
+  visibility            String?   @default("private")
+  model                 String?   @default("Qwen3-8B")
+  systemPrompt          String?   @map("system_prompt")
+  temperature           Decimal?  @default(0.7) @db.Decimal(3, 2)
+  topP                  Decimal?  @default(0.9) @db.Decimal(3, 2)
+  maxTokens             Int?      @default(2048) @map("max_tokens")
+  contextLength         Int?      @default(8192) @map("context_length")
+  reasoningMode         Boolean?  @default(false) @map("reasoning_mode")
+  streamingEnabled      Boolean?  @default(true) @map("streaming_enabled")
+  functionCalling       Boolean?  @default(false) @map("function_calling")
+  visionSupport         Boolean?  @default(false) @map("vision_support")
+  memoryEnabled         Boolean?  @default(true) @map("memory_enabled")
+  memoryLimit           Int?      @default(10) @map("memory_limit")
+  sessionTimeoutMinutes Int?      @default(30) @map("session_timeout_minutes")
+  knowledgeBaseId       String?   @map("knowledge_base_id") @db.Uuid
+  embeddingModel        String?   @default("sentence-transformers/all-MiniLM-L6-v2") @map("embedding_model")
+  totalRequests         Int?      @default(0) @map("total_requests")
+  totalTokens           BigInt?   @default(0) @map("total_tokens")
+  avgResponseTimeMs     Int?      @map("avg_response_time_ms")
+  successRate           Decimal?  @map("success_rate") @db.Decimal(5, 2)
+  errorRate             Decimal?  @map("error_rate") @db.Decimal(5, 2)
+  lastUsedAt            DateTime? @map("last_used_at") @db.Timestamptz
+  createdAt             DateTime? @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt             DateTime? @default(now()) @map("updated_at") @db.Timestamptz
+
+  playgroundSessions PlaygroundSession[]
+
+  @@map("agents")
+}
+
+model KnowledgeBase {
+  id              String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tenantId        String?   @map("tenant_id") @db.Uuid
+  tenant          Tenant?   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  name            String
+  description     String?
+  status          String?   @default("active")
+  totalDocuments  Int?      @default(0) @map("total_documents")
+  storageBytes    BigInt?   @default(0) @map("storage_bytes")
+  totalEmbeddings BigInt?   @default(0) @map("total_embeddings")
+  lastSyncAt      DateTime? @map("last_sync_at") @db.Timestamptz
+  indexStatus     String?   @default("pending") @map("index_status")
+  createdAt       DateTime? @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt       DateTime  @default(now()) @map("updated_at") @db.Timestamptz
+
+  documents KnowledgeDocument[]
+
+  @@map("knowledge_bases")
+}
+
+model KnowledgeDocument {
+  id              String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tenantId        String?        @map("tenant_id") @db.Uuid
+  tenant          Tenant?        @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  userId          String?        @map("user_id") @db.Uuid
+  user            User?          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  knowledgeBaseId String?        @map("knowledge_base_id") @db.Uuid
+  knowledgeBase   KnowledgeBase? @relation(fields: [knowledgeBaseId], references: [id], onDelete: Cascade)
+  filename        String?
+  fileType        String?        @map("file_type")
+  fileSizeBytes   Int?           @map("file_size_bytes")
+  chunkCount      Int?           @map("chunk_count")
+  embeddingCount  Int?           @map("embedding_count")
+  status          String?        @default("pending")
+  errorMessage    String?        @map("error_message")
+  content         String?
+  isActive        Boolean?       @default(true) @map("is_active")
+  createdAt       DateTime?      @default(now()) @map("created_at") @db.Timestamptz
+
+  @@map("knowledge_documents")
+}
+
+model AiActivity {
+  id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tenantId     String?   @map("tenant_id") @db.Uuid
+  tenant       Tenant?   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  userId       String?   @map("user_id") @db.Uuid
+  agentId      String?   @map("agent_id") @db.Uuid
+  model        String?
+  endpoint     String?   @default("/api/chat")
+  status       String?   @default("waiting")
+  tokensIn     Int?      @default(0) @map("tokens_in")
+  tokensOut    Int?      @default(0) @map("tokens_out")
+  latencyMs    Int?      @map("latency_ms")
+  gpuPercent   Int?      @map("gpu_percent")
+  errorMessage String?   @map("error_message")
+  createdAt    DateTime? @default(now()) @map("created_at") @db.Timestamptz
+  completedAt  DateTime? @map("completed_at") @db.Timestamptz
+
+  @@map("ai_activity")
+}
+
+model Workflow {
+  id              String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tenantId        String?   @map("tenant_id") @db.Uuid
+  tenant          Tenant?   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  name            String
+  description     String?
+  triggerType     String?   @default("manual") @map("trigger_type")
+  status          String?   @default("active")
+  steps           Json?     @default("[]")
+  executionCount  Int?      @default(0) @map("execution_count")
+  lastExecutionAt DateTime? @map("last_execution_at") @db.Timestamptz
+  avgDurationMs   Int?      @map("avg_duration_ms")
+  successRate     Decimal?  @default(100) @map("success_rate") @db.Decimal(5, 2)
+  createdAt       DateTime? @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt       DateTime  @default(now()) @map("updated_at") @db.Timestamptz
+
+  executions WorkflowExecution[]
+
+  @@map("workflows")
+}
+
+model WorkflowExecution {
+  id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tenantId     String?   @map("tenant_id") @db.Uuid
+  tenant       Tenant?   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  workflowId   String?   @map("workflow_id") @db.Uuid
+  workflow     Workflow? @relation(fields: [workflowId], references: [id], onDelete: Cascade)
+  status       String?   @default("running")
+  startedAt    DateTime? @default(now()) @map("started_at") @db.Timestamptz
+  completedAt  DateTime? @map("completed_at") @db.Timestamptz
+  durationMs   Int?      @map("duration_ms")
+  logs         String?
+  errorMessage String?   @map("error_message")
+
+  @@map("workflow_executions")
+}
+
+model Notification {
+  id        String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tenantId  String?   @map("tenant_id") @db.Uuid
+  tenant    Tenant?   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  userId    String?   @map("user_id") @db.Uuid
+  user      User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type      String?
+  title     String
+  message   String?
+  link      String?
+  isRead    Boolean?  @default(false) @map("is_read")
+  createdAt DateTime? @default(now()) @map("created_at") @db.Timestamptz
+
+  @@map("notifications")
+}
+
+model InfrastructureCost {
+  id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  category    String?
+  description String?
+  amount      Decimal   @db.Decimal(10, 2)
+  currency    String?   @default("INR")
+  periodStart DateTime? @map("period_start") @db.Date
+  periodEnd   DateTime? @map("period_end") @db.Date
+  createdAt   DateTime? @default(now()) @map("created_at") @db.Timestamptz
+
+  @@map("infrastructure_costs")
+}
+
+model Integration {
+  id               String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tenantId         String?   @map("tenant_id") @db.Uuid
+  tenant           Tenant?   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  provider         String
+  displayName      String?   @map("display_name")
+  connectionStatus String?   @default("disconnected") @map("connection_status")
+  lastSyncAt       DateTime? @map("last_sync_at") @db.Timestamptz
+  connectedAt      DateTime? @map("connected_at") @db.Timestamptz
+  errorCount       Int?      @default(0) @map("error_count")
+  authConfig       Json?     @map("auth_config")
+  createdAt        DateTime? @default(now()) @map("created_at") @db.Timestamptz
+
+  @@map("integrations")
+}
+
+model VectorCollection {
+  id              String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tenantId        String?   @map("tenant_id") @db.Uuid
+  tenant          Tenant?   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  name            String
+  description     String?
+  vectorCount     BigInt?   @default(0) @map("vector_count")
+  storageBytes    BigInt?   @default(0) @map("storage_bytes")
+  indexStatus     String?   @default("pending") @map("index_status")
+  queryRate       Float?    @default(0) @map("query_rate")
+  searchLatencyMs Int?      @default(0) @map("search_latency_ms")
+  createdAt       DateTime? @default(now()) @map("created_at") @db.Timestamptz
+
+  @@map("vector_collections")
+}
+
+model Backup {
+  id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tenantId      String?   @map("tenant_id") @db.Uuid
+  tenant        Tenant?   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  name          String
+  type          String?   @default("full")
+  sizeBytes     BigInt?   @map("size_bytes")
+  status        String?   @default("pending")
+  storagePath   String?   @map("storage_path")
+  startedAt     DateTime? @map("started_at") @db.Timestamptz
+  completedAt   DateTime? @map("completed_at") @db.Timestamptz
+  verifiedAt    DateTime? @map("verified_at") @db.Timestamptz
+  retentionDays Int?      @default(30) @map("retention_days")
+  errorMessage  String?   @map("error_message")
+  createdAt     DateTime? @default(now()) @map("created_at") @db.Timestamptz
+
+  @@map("backups")
+}
+
+model PlaygroundSession {
+  id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tenantId     String?   @map("tenant_id") @db.Uuid
+  tenant       Tenant?   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  adminId      String?   @map("admin_id") @db.Uuid
+  user         User?     @relation(fields: [adminId], references: [id], onDelete: Cascade)
+  model        String?
+  agentId      String?   @map("agent_id") @db.Uuid
+  systemPrompt String?   @map("system_prompt")
+  temperature  Decimal?  @default(0.7) @db.Decimal(3, 2)
+  maxTokens    Int?      @default(2048) @map("max_tokens")
+  messages     Json?     @default("[]")
+  tokensIn     Int?      @default(0) @map("tokens_in")
+  tokensOut    Int?      @default(0) @map("tokens_out")
+  latencyMs    Int?      @map("latency_ms")
+  createdAt    DateTime? @default(now()) @map("created_at") @db.Timestamptz
+  Agent        Agent?    @relation(fields: [agentId], references: [id])
+
+  @@map("playground_sessions")
+}
+
+model SystemMetric {
+  id                 String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  gpuVramUsedMb      Int?      @map("gpu_vram_used_mb")
+  gpuVramTotalMb     Int?      @map("gpu_vram_total_mb")
+  ramUsedMb          Int?      @map("ram_used_mb")
+  ramTotalMb         Int?      @map("ram_total_mb")
+  cpuPercent         Int?      @map("cpu_percent")
+  diskUsedGb         Int?      @map("disk_used_gb")
+  diskTotalGb        Int?      @map("disk_total_gb")
+  activeModel        String?   @map("active_model")
+  vllmStatus         String?   @map("vllm_status")
+  tensorParallelSize Int?      @map("tensor_parallel_size")
+  createdAt          DateTime? @default(now()) @map("created_at") @db.Timestamptz
+
+  @@map("system_metrics")
+}

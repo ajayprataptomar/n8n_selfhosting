@@ -5,6 +5,7 @@ import { AuthUtils } from "../lib/auth.js";
 import { authMiddleware, AuthenticatedRequest } from "../middleware/auth.js";
 import { validate } from "../middleware/validate.js";
 import { EmailService } from "../services/email.service.js";
+import { DockerService } from "../services/docker.service.js";
 
 const router = Router();
 
@@ -14,7 +15,12 @@ const signupSchema = z.object({
     password: z.string().min(6),
     name: z.string().min(2),
     company: z.string().optional(),
-    plan: z.enum(["LITE", "BASIC", "PRO", "HEAVY"]).default("BASIC"),
+    plan: z.enum(["STARTER", "PRO", "BUSINESS", "ENTERPRISE"]).default("STARTER"),
+    aiPlan: z.enum(["STARTER", "PRO", "BUSINESS", "ENTERPRISE"]).default("STARTER"),
+    agentType: z.enum(["CHAT", "CODING", "HYBRID"]).default("CHAT"),
+    model: z.string().default("harikson-chat-8b"),
+    n8nEnabled: z.boolean().default(true),
+    aiEnabled: z.boolean().default(false),
   }),
 });
 
@@ -28,7 +34,7 @@ const loginSchema = z.object({
 // POST /auth/signup
 router.post("/signup", validate(signupSchema), async (req, res, next) => {
   try {
-    const { email, password, name, company, plan } = req.body;
+    const { email, password, name, company, plan, aiPlan, agentType, model, n8nEnabled, aiEnabled } = req.body;
 
     const existingUser = await prisma.user.findUnique({ where: { email } });
     if (existingUser) {
@@ -37,10 +43,10 @@ router.post("/signup", validate(signupSchema), async (req, res, next) => {
 
     const hashedPassword = AuthUtils.hashPassword(password);
     
-    // Check if it's the very first user; if so, default to ADMIN role to ease setup
     const userCount = await prisma.user.count();
     const role = userCount === 0 ? "ADMIN" : "USER";
-    const status = role === "ADMIN" ? "ACTIVE" : "PENDING";
+    const autoApprove = process.env.AUTO_APPROVE_USERS !== "false";
+    const status = (role === "ADMIN" || autoApprove) ? "ACTIVE" : "PENDING";
 
     const user = await prisma.user.create({
       data: {
@@ -49,10 +55,44 @@ router.post("/signup", validate(signupSchema), async (req, res, next) => {
         name,
         company,
         plan,
+        aiPlan,
         role,
         status,
+        agentType,
+        model,
+        n8nEnabled,
+        aiEnabled,
       },
     });
+
+    // Auto-provision instance if active
+    if (status === "ACTIVE") {
+      try {
+        const safeName = user.email.split("@")[0].replace(/[^a-zA-Z0-9]/g, "").toLowerCase();
+        const apps: string[] = [];
+        if (user.n8nEnabled) apps.push("n8n");
+        if (user.aiEnabled) apps.push("openwebui");
+
+        const containerInfo = await DockerService.createInstance(safeName, user.plan, apps);
+        await prisma.instance.create({
+          data: {
+            userId: user.id,
+            name: safeName,
+            domain: containerInfo.domain,
+            containerId: containerInfo.containerId,
+            status: "RUNNING",
+            cpuLimit: user.plan === "BUSINESS" ? 2.0 : user.plan === "PRO" ? 1.0 : 0.5,
+            memoryLimit: user.plan === "BUSINESS" ? "2048m" : user.plan === "PRO" ? "1024m" : "512m",
+            storageLimit: user.plan === "BUSINESS" ? "50GB" : user.plan === "PRO" ? "25GB" : "10GB",
+            apps: apps,
+            agentType: user.agentType,
+            model: user.model,
+          },
+        });
+      } catch (provErr) {
+        console.warn("Could not auto-provision instance on signup:", provErr);
+      }
+    }
 
     // Send welcome email
     try {
@@ -62,7 +102,9 @@ router.post("/signup", validate(signupSchema), async (req, res, next) => {
     }
 
     res.status(201).json({
-      message: "Registration successful. Pending admin activation.",
+      message: status === "ACTIVE" 
+        ? "Registration successful! You can now log in." 
+        : "Registration successful. Pending admin activation.",
       userId: user.id,
       role: user.role,
       status: user.status,
@@ -114,7 +156,10 @@ router.post("/login", validate(loginSchema), async (req, res, next) => {
         name: user.name,
         role: user.role,
         plan: user.plan,
+        aiPlan: user.aiPlan,
         status: user.status,
+        n8nEnabled: user.n8nEnabled,
+        aiEnabled: user.aiEnabled,
       },
     });
   } catch (error) {
@@ -134,8 +179,11 @@ router.get("/me", authMiddleware, async (req: AuthenticatedRequest, res: Respons
         company: true,
         role: true,
         plan: true,
+        aiPlan: true,
         status: true,
         createdAt: true,
+        n8nEnabled: true,
+        aiEnabled: true,
       },
     });
 

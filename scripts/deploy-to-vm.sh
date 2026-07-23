@@ -41,7 +41,7 @@ fi
 echo ""
 echo -e "${YELLOW}Step 2: Syncing codebase to VM ($VM_HOST)...${NC}"
 
-ssh -o ServerAliveInterval=30 -i "$VM_KEY" "$VM_USER@$VM_HOST" "sudo mkdir -p /mnt/docker-data/harikson && sudo chown -R ubuntu:ubuntu /mnt/docker-data/harikson"
+ssh -o ServerAliveInterval=30 -i "$VM_KEY" "$VM_USER@$VM_HOST" "sudo mkdir -p /mnt/docker-data && sudo chown -R ubuntu:ubuntu /mnt/docker-data"
 
 rsync -avz -e "ssh -i $VM_KEY -o ServerAliveInterval=30" \
     --exclude='.git' \
@@ -49,7 +49,7 @@ rsync -avz -e "ssh -i $VM_KEY -o ServerAliveInterval=30" \
     --exclude='.next' \
     --exclude='postgres-data' \
     --exclude='redis-data' \
-    ./harikson/ "$VM_USER@$VM_HOST:/mnt/docker-data/harikson/"
+    ./ "$VM_USER@$VM_HOST:/mnt/docker-data/"
 
 echo -e "${GREEN}✓ Codebase synced to VM${NC}"
 
@@ -59,7 +59,7 @@ echo -e "${YELLOW}Step 3: Building and Re-launching services on VM...${NC}"
 ssh -o ServerAliveInterval=30 -o ServerAliveCountMax=20 -i "$VM_KEY" "$VM_USER@$VM_HOST" << 'REMOTE_SCRIPT'
     set -e
     
-    cd /mnt/docker-data/harikson
+    cd /mnt/docker-data
     
     echo "Stopping existing containers and freeing up disk space on VM..."
     docker compose down --remove-orphans || true
@@ -70,7 +70,7 @@ ssh -o ServerAliveInterval=30 -o ServerAliveCountMax=20 -i "$VM_KEY" "$VM_USER@$
     sudo rm -rf /tmp/* || true
     
     echo "Building services..."
-    docker compose build --no-cache || true
+    docker compose build || true
     
     echo "Starting services..."
     docker compose up -d

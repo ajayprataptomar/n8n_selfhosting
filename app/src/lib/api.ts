@@ -1,4 +1,12 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+const getBaseUrl = (): string => {
+  if (typeof window !== "undefined") {
+    const hostname = window.location.hostname;
+    if (hostname !== "localhost" && hostname !== "127.0.0.1" && !hostname.endsWith(".neuravolt.cloud")) {
+      return `${window.location.protocol}//${hostname}:3000`;
+    }
+  }
+  return process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+};
 
 export class ApiClient {
   private static getHeaders(): HeadersInit {
@@ -15,7 +23,7 @@ export class ApiClient {
   }
 
   static async get<T>(path: string): Promise<T> {
-    const res = await fetch(`${API_BASE_URL}${path}`, {
+    const res = await fetch(`${getBaseUrl()}${path}`, {
       method: "GET",
       headers: this.getHeaders(),
     });
@@ -27,7 +35,7 @@ export class ApiClient {
   }
 
   static async post<T>(path: string, body?: any): Promise<T> {
-    const res = await fetch(`${API_BASE_URL}${path}`, {
+    const res = await fetch(`${getBaseUrl()}${path}`, {
       method: "POST",
       headers: this.getHeaders(),
       body: body ? JSON.stringify(body) : undefined,
@@ -40,7 +48,7 @@ export class ApiClient {
   }
 
   static async delete<T>(path: string): Promise<T> {
-    const res = await fetch(`${API_BASE_URL}${path}`, {
+    const res = await fetch(`${getBaseUrl()}${path}`, {
       method: "DELETE",
       headers: this.getHeaders(),
     });

@@ -90,6 +90,8 @@ services:
     build: ./backend
     container_name: nv-api
     restart: unless-stopped
+    ports:
+      - "3000:3000"
     environment:
       - DATABASE_URL=postgresql://neuravolt:neuravolt_dev_pwd@nv-postgres:5432/neuravolt
       - REDIS_URL=redis://nv-redis:6379
@@ -122,6 +124,8 @@ services:
         NEXT_PUBLIC_API_URL: https://api.neuravolt.cloud
     container_name: nv-app
     restart: unless-stopped
+    ports:
+      - "3028:3001"
     environment:
       - NEXT_PUBLIC_API_URL=https://api.neuravolt.cloud
       - NEXTAUTH_SECRET_FILE=/run/secrets/jwt_secret
@@ -149,6 +153,8 @@ services:
         NEXT_PUBLIC_API_URL: https://api.neuravolt.cloud
     container_name: nv-admin
     restart: unless-stopped
+    ports:
+      - "3018:3002"
     environment:
       - NEXT_PUBLIC_API_URL=https://api.neuravolt.cloud
       - NEXTAUTH_SECRET_FILE=/run/secrets/jwt_secret

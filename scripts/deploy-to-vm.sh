@@ -61,7 +61,10 @@ ssh -o ServerAliveInterval=30 -o ServerAliveCountMax=20 -i "$VM_KEY" "$VM_USER@$
     
     cd /mnt/docker-data/harikson
     
-    echo "Freeing up disk space on VM..."
+    echo "Stopping existing containers and freeing up disk space on VM..."
+    docker compose down --remove-orphans || true
+    docker stop $(docker ps -aq) || true
+    docker rm $(docker ps -aq) || true
     docker system prune -af --volumes || true
     docker builder prune -af || true
     sudo rm -rf /tmp/* || true

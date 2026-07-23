@@ -201,7 +201,6 @@ async function checkReplicationLag() {
     }
   }
 }
-}
 setInterval(checkReplicationLag, 5000);
 
 import crypto from 'crypto';

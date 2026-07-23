@@ -56,7 +56,11 @@ ssh -o ServerAliveInterval=30 -o ServerAliveCountMax=20 -i "$VM_KEY" "$VM_USER@$
         chmod +x scripts/*.sh
         ./scripts/deploy.sh
     else
-        echo "Repository exists. Updating and rebuilding services..."
+        echo "Repository exists. Freeing up disk space on VM..."
+        docker system prune -af --volumes || true
+        docker builder prune -af || true
+        sudo rm -rf /tmp/* || true
+        
         cd harikson
         git fetch origin
         git reset --hard origin/main

@@ -37,40 +37,40 @@ else
     exit 1
 fi
 
-# Step 2: SSH into VM and deploy
+# Step 2: Sync files to VM and deploy
 echo ""
-echo -e "${YELLOW}Step 2: Deploying to VM...${NC}"
+echo -e "${YELLOW}Step 2: Syncing codebase to VM ($VM_HOST)...${NC}"
+
+ssh -o ServerAliveInterval=30 -i "$VM_KEY" "$VM_USER@$VM_HOST" "sudo mkdir -p /mnt/docker-data/harikson && sudo chown -R ubuntu:ubuntu /mnt/docker-data/harikson"
+
+rsync -avz -e "ssh -i $VM_KEY -o ServerAliveInterval=30" \
+    --exclude='.git' \
+    --exclude='node_modules' \
+    --exclude='.next' \
+    --exclude='postgres-data' \
+    --exclude='redis-data' \
+    ./harikson/ "$VM_USER@$VM_HOST:/mnt/docker-data/harikson/"
+
+echo -e "${GREEN}✓ Codebase synced to VM${NC}"
+
+echo ""
+echo -e "${YELLOW}Step 3: Building and Re-launching services on VM...${NC}"
 
 ssh -o ServerAliveInterval=30 -o ServerAliveCountMax=20 -i "$VM_KEY" "$VM_USER@$VM_HOST" << 'REMOTE_SCRIPT'
     set -e
     
-    echo "Connected to VM"
+    cd /mnt/docker-data/harikson
     
-    sudo mkdir -p /mnt/docker-data/harikson && sudo chown ubuntu:ubuntu /mnt/docker-data/harikson
-    cd /mnt/docker-data
+    echo "Freeing up disk space on VM..."
+    docker system prune -af --volumes || true
+    docker builder prune -af || true
+    sudo rm -rf /tmp/* || true
     
-    if [ ! -d "harikson" ]; then
-        echo "Cloning fresh repository..."
-        git clone https://github.com/ashishtomarnet123-oss/harikson.git
-        cd harikson
-        chmod +x scripts/*.sh
-        ./scripts/deploy.sh
-    else
-        echo "Repository exists. Freeing up disk space on VM..."
-        docker system prune -af --volumes || true
-        docker builder prune -af || true
-        sudo rm -rf /tmp/* || true
-        
-        cd harikson
-        git fetch origin
-        git reset --hard origin/main
-        
-        # Build modified containers
-        docker compose build || docker compose build --no-cache user-portal admin-panel admin-api tenant-api || true
-        
-        # Re-launch services
-        docker compose up -d
-    fi
+    echo "Building services..."
+    docker compose build --no-cache || true
+    
+    echo "Starting services..."
+    docker compose up -d
 REMOTE_SCRIPT
 
 echo ""

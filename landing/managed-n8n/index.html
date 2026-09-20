@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Managed n8n Hosting India | Dedicated Workflow Automation Nodes | NeuraVolt Cloud</title>
+  <meta name="description" content="Deploy fully managed, high-concurrency n8n nodes in India. Isolated Docker containers, auto-restart queue engine, custom domain mapping, instant SSL, and automated nightly backups starting at ₹999/mo.">
+  <link rel="canonical" href="https://neuravolt.cloud/managed-n8n">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Managed n8n Hosting India | Dedicated Workflow Automation Nodes | NeuraVolt Cloud">
+  <meta property="og:description" content="Deploy fully managed, high-concurrency n8n nodes in India. Isolated Docker containers, auto-restart queue engine, custom domain mapping, instant SSL, and automated nightly backups starting at ₹999/mo.">
+  <meta property="og:url" content="https://neuravolt.cloud/managed-n8n">
+  <meta property="og:type" content="product">
+  <meta property="og:site_name" content="NeuraVolt Cloud Services">
+  <meta property="og:image" content="https://neuravolt.cloud/assets/logos/neuravolt_cloud_logo.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Managed n8n Hosting India | Dedicated Workflow Automation Nodes | NeuraVolt Cloud">
+  <meta name="twitter:description" content="Deploy fully managed, high-concurrency n8n nodes in India. Isolated Docker containers, auto-restart queue engine, custom domain mapping, instant SSL, and automated nightly backups starting at ₹999/mo.">
+  <meta name="twitter:image" content="https://neuravolt.cloud/assets/logos/neuravolt_cloud_logo.png">
+
+  <!-- Favicons & Styles -->
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" type="image/png" href="../assets/favicon.png?v=3">
+  <link rel="shortcut icon" href="../assets/favicon.ico?v=3">
+  <link rel="apple-touch-icon" href="../assets/favicon.png?v=3">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Isolated Docker Workflow Execution Architecture",
+      "description": "Deploy fully managed, high-concurrency n8n nodes in India. Isolated Docker containers, auto-restart queue engine, custom domain mapping, instant SSL, and automated nightly backups starting at ₹999/mo.",
+      "brand": {
+        "@type": "Brand",
+        "name": "NeuraVolt Cloud Services"
+      },
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "INR",
+        "lowPrice": "999",
+        "offerCount": "3"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://neuravolt.cloud/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Isolated Docker Workflow Execution Architecture",
+          "item": "https://neuravolt.cloud/managed-n8n"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Do you impose limits on workflow runs or executions?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No! Unlike n8n.cloud which bills per execution, NeuraVolt Managed n8n has zero artificial execution limits. Your node runs as many workflows as your dedicated hardware resources can handle."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I connect custom domains and white-label n8n?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, on Pro and Enterprise tiers you can bind any custom domain (e.g. workflow.mybrand.com) with automated SSL certificates."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How are backups handled for my workflows and credentials?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Your entire SQLite/Postgres database and encryption key are backed up in nightly snapshot archives, ensuring your sensitive workflow credentials are safe."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I install community nodes from npm?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, full community node support is enabled. You can install custom nodes directly from the n8n UI or request custom node package additions."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+
+  
+  <!-- Header / Navigation -->
+  <header>
+    <div class="container nav-wrapper">
+      <a href="../index.html" class="logo-brand">
+        <img src="../assets/logos/neuravolt_cloud_logo.png" alt="NeuraVolt Cloud Services">
+      </a>
+      
+      <ul class="nav-links">
+        <li><a href="../cloud-hosting.html" class="">Cloud Hosting</a></li>
+        <li><a href="../cloud-vps.html" class="">VPS & Compute</a></li>
+        <li><a href="../managed-n8n.html" class="active-nav">Managed n8n</a></li>
+        <li><a href="../guardian-sre.html" class="">Guardian SRE</a></li>
+        <li><a href="../index.html#pricing">All Plans</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="https://app.neuravolt.cloud" target="_blank" class="btn btn-secondary btn-sm">Client Login</a>
+        <a href="#pricing" class="btn btn-primary btn-sm">Deploy Now</a>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- Hero Section -->
+  <section class="hero container">
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a>
+      <span>/</span>
+      <a href="../index.html#pricing">Infrastructure Products</a>
+      <span>/</span>
+      <span class="current">Isolated Docker Workflow Execution Architecture</span>
+    </div>
+
+    <div class="hero-badge">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      <span>Isolated Docker Workflow Execution Architecture</span>
+    </div>
+
+    <h1>Managed n8n Workflow Automation Nodes.<br><span class="gradient-text">Zero Maintenance, Dedicated Resources & Auto-Scaling.</span></h1>
+    <p class="hero-subtitle">Run mission-critical automation pipelines, CRM integrations, AI agent workflows, and webhook queues on dedicated n8n instances. No server management, no memory leak crashes, and 100% uptime.</p>
+
+    <div class="hero-actions">
+      <a href="#pricing" class="btn btn-primary">Deploy Managed n8n Node →</a>
+      <button onclick="openLeadModal('nodes')" class="btn btn-secondary">Request Custom Quote</button>
+    </div>
+  </section>
+
+  <!-- Pricing Cards Section -->
+  <section id="pricing" class="pricing-section container">
+    <div class="section-header">
+      <span class="section-tag">Isolated Docker Workflow Execution Architecture Plans & Pricing</span>
+      <h2>Select Your Optimized Specification</h2>
+      <p>Instant provisioning, transparent billing, and 100% NVMe performance standard on every tier.</p>
+    </div>
+
+    <div class="pricing-grid">
+      
+        <div class="price-card ">
+          
+          <div class="price-header">
+            <h3>n8n Basic Node</h3>
+            <p class="plan-desc">For solopreneurs and developers automating personal projects and light webhooks.</p>
+          </div>
+          <div class="price-value">₹999<span>/month</span></div>
+          <ul class="price-specs">
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>0.5 Dedicated CPU Core</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>512 MB High-Speed RAM</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>10 GB Gen4 NVMe Persistent Disk</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Instant Subdomain & SSL Certificate</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Docker Container Auto-Restart Engine</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Community Nodes & Custom NPM Support</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Standard Webhook Queue Processing</span></li>
+          </ul>
+          <button onclick="openLeadModal('nodes', 'n8n-basic')" class="btn btn-secondary">Deploy n8n Basic</button>
+        </div>
+  
+        <div class="price-card featured">
+          <div class="featured-ribbon">Most Popular</div>
+          <div class="price-header">
+            <h3>n8n Pro Node</h3>
+            <p class="plan-desc">For marketing agencies, CRM syncs, high-volume production webhooks, and active pipelines.</p>
+          </div>
+          <div class="price-value">₹1,999<span>/month</span></div>
+          <ul class="price-specs">
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>1.0 Dedicated CPU Core</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>1024 MB High-Speed RAM</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>25 GB Gen4 NVMe Storage</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Custom Domain Binding (e.g. n8n.yourdomain.com)</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Automated Nightly Snapshot Backups</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>High-Throughput Webhook Worker</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Guardian Autonomous Crash Recovery</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Priority WhatsApp Support</span></li>
+          </ul>
+          <button onclick="openLeadModal('nodes', 'n8n-pro')" class="btn btn-primary">Deploy Pro Node</button>
+        </div>
+  
+        <div class="price-card ">
+          
+          <div class="price-header">
+            <h3>n8n Heavy Enterprise</h3>
+            <p class="plan-desc">For enterprise automation fleets, multi-worker queues, AI agents, and heavy payload transforms.</p>
+          </div>
+          <div class="price-value">₹3,999<span>/month</span></div>
+          <ul class="price-specs">
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>2.0 Dedicated CPU Cores</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>2048 MB Dedicated RAM</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>50 GB Gen4 NVMe Storage</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Dedicated Redis Queue Scaling</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Sub-50ms Global Webhook Response</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Custom Python/Node Module Injection</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Dedicated Slack Engineering Channel</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>1-on-1 Automation Architecture Advisory</span></li>
+          </ul>
+          <button onclick="openLeadModal('nodes', 'n8n-heavy')" class="btn btn-secondary">Deploy Heavy Node</button>
+        </div>
+  
+    </div>
+  </section>
+
+  <!-- Technical Features Showcase -->
+  <section class="container" style="margin-top: 5rem; margin-bottom: 5rem;">
+    <div class="section-header">
+      <span class="section-tag">Engineering Advantages</span>
+      <h2>Built for Extreme Concurrency & Throughput</h2>
+      <p>Why leading engineering teams choose NeuraVolt Cloud over legacy providers.</p>
+    </div>
+
+    <div class="feature-showcase-grid">
+      
+        <div class="showcase-card">
+          <div class="showcase-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg></div>
+          <h3>100% Isolated Docker Sandbox</h3>
+          <p>Every client runs inside an isolated Docker container with reserved CPU, RAM, and persistent volume mount. No noisy neighbors or shared runtime bottlenecks.</p>
+        </div>
+  
+        <div class="showcase-card">
+          <div class="showcase-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg></div>
+          <h3>Custom Domain & Instant SSL</h3>
+          <p>Map your own custom white-labeled domain (e.g. automation.agency.com) in seconds with automated Let's Encrypt TLS certificates and HTTP/2 protocol.</p>
+        </div>
+  
+        <div class="showcase-card">
+          <div class="showcase-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg></div>
+          <h3>Automated Crash Protection</h3>
+          <p>Heavy loops or memory leaks in custom JavaScript nodes? Guardian SRE detects container freezes and auto-heals the instance in under 2 seconds without workflow loss.</p>
+        </div>
+  
+        <div class="showcase-card">
+          <div class="showcase-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          <h3>Community & Custom Node Packages</h3>
+          <p>Easily install community nodes from npm, inject external AI library credentials (OpenAI, Anthropic, Gemini), and integrate WhatsApp Business APIs seamlessly.</p>
+        </div>
+  
+    </div>
+  </section>
+
+  <!-- Architectural Comparison Table -->
+  <section class="container" style="margin-bottom: 5rem;">
+    <div class="section-header">
+      <span class="section-tag">Direct Benchmarks</span>
+      <h2>NeuraVolt Cloud vs Industry Alternatives</h2>
+      <p>Clear architectural differentiation with zero marketing fluff.</p>
+    </div>
+
+    <div class="specs-table-wrapper">
+      <table class="specs-table">
+        <thead>
+          <tr>
+            <th>Architecture Dimension</th>
+            <th style="color: var(--primary);">NeuraVolt Cloud</th>
+            <th>Traditional Shared / AWS</th>
+            <th>Budget Providers</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr>
+            <td><strong>Execution Limits</strong></td>
+            <td style="color: var(--primary); font-weight: 700;">Unlimited Executions (Hardware Capped)</td>
+            <td>Hard Execution Limits (n8n Cloud)</td>
+            <td>Requires Manual Setup & DevOps</td>
+          </tr>
+  
+          <tr>
+            <td><strong>Custom Domain SSL</strong></td>
+            <td style="color: var(--primary); font-weight: 700;">Included on all tiers</td>
+            <td>Only on higher $50+ tiers</td>
+            <td>Requires manual Traefik/Nginx</td>
+          </tr>
+  
+          <tr>
+            <td><strong>Workflow Auto-Backups</strong></td>
+            <td style="color: var(--primary); font-weight: 700;">Nightly Persistent Snapshots</td>
+            <td>Cloud Storage Only</td>
+            <td>DIY cron scripts</td>
+          </tr>
+  
+          <tr>
+            <td><strong>Crash Self-Healing</strong></td>
+            <td style="color: var(--primary); font-weight: 700;">Sub-2s Guardian SRE</td>
+            <td>Standard cloud restart</td>
+            <td>Manual SSH reboot</td>
+          </tr>
+  
+          <tr>
+            <td><strong>Pricing</strong></td>
+            <td style="color: var(--primary); font-weight: 700;">Starts at ₹999/mo ($12)</td>
+            <td>Starts at $20 - $50/mo</td>
+            <td>VPS cost + DevOps labor</td>
+          </tr>
+  
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Frequently Asked Questions -->
+  <section class="container" style="margin-bottom: 5rem;">
+    <div class="section-header">
+      <span class="section-tag">Knowledge Base & FAQ</span>
+      <h2>Got Questions? We Have Answers.</h2>
+      <p>Everything you need to know about provisioning, migration, SLAs, and technical support.</p>
+    </div>
+
+    <div class="faq-container">
+      
+      <div class="faq-item active">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Do you impose limits on workflow runs or executions?</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>No! Unlike n8n.cloud which bills per execution, NeuraVolt Managed n8n has zero artificial execution limits. Your node runs as many workflows as your dedicated hardware resources can handle.</p>
+        </div>
+      </div>
+  
+      <div class="faq-item ">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Can I connect custom domains and white-label n8n?</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Yes, on Pro and Enterprise tiers you can bind any custom domain (e.g. workflow.mybrand.com) with automated SSL certificates.</p>
+        </div>
+      </div>
+  
+      <div class="faq-item ">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>How are backups handled for my workflows and credentials?</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Your entire SQLite/Postgres database and encryption key are backed up in nightly snapshot archives, ensuring your sensitive workflow credentials are safe.</p>
+        </div>
+      </div>
+  
+      <div class="faq-item ">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Can I install community nodes from npm?</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Yes, full community node support is enabled. You can install custom nodes directly from the n8n UI or request custom node package additions.</p>
+        </div>
+      </div>
+  
+    </div>
+  </section>
+
+  <!-- High-Impact Conversion Banner -->
+  <section class="container" style="margin-bottom: 5rem;">
+    <div style="background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%); border-radius: 20px; padding: 48px; color: white; text-align: center; box-shadow: var(--shadow-lg); border: 1px solid rgba(255,85,0,0.2);">
+      <span style="background: rgba(255,85,0,0.2); color: #FF7722; padding: 6px 14px; border-radius: 9999px; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; display: inline-block; margin-bottom: 16px;">Ready to Scale?</span>
+      <h2 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 12px; color: white;">Experience Sub-Millisecond Cloud Infrastructure</h2>
+      <p style="color: #94A3B8; max-width: 650px; margin: 0 auto 28px; font-size: 0.95rem;">Join forward-thinking agencies, developers, and enterprises deployed on NeuraVolt Cloud.</p>
+      <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+        <button onclick="openLeadModal('nodes')" class="btn btn-primary" style="padding: 14px 28px; font-size: 0.95rem;">Deploy Instant Instance →</button>
+        <a href="../index.html" class="btn btn-secondary" style="background: rgba(255,255,255,0.08); color: white; border-color: rgba(255,255,255,0.15); padding: 14px 24px;">Explore All Products</a>
+      </div>
+    </div>
+  </section>
+
+  
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="../assets/logos/neuravolt_cloud_logo_dark.png?v=4" alt="NeuraVolt Cloud Services" style="height: 44px; max-width: 220px; object-fit: contain; margin-bottom: 8px;">
+          <p>Next-generation autonomous cloud infrastructure, high-frequency compute, and self-healing reliability engineered for modern enterprises.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Dedicated Products</h4>
+          <ul>
+            <li><a href="../cloud-hosting.html">High-Speed Cloud Web Hosting</a></li>
+            <li><a href="../cloud-vps.html">Cloud VPS & Dedicated Compute</a></li>
+            <li><a href="../managed-n8n.html">Managed n8n Automation Nodes</a></li>
+            <li><a href="../guardian-sre.html">Guardian SRE Self-Healing Watchdog</a></li>
+            <li><a href="../index.html#pricing">All Infrastructure Pricing</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Customer Portals</h4>
+          <ul>
+            <li><a href="https://app.neuravolt.cloud" target="_blank" style="color: #FF7722; font-weight: 600;">🚀 Client Portal (n8n)</a></li>
+            <li><a href="https://reach.neuravolt.cloud" target="_blank">⚡ NeuraVolt Reach</a></li>
+            <li><a href="https://monitor.neuravolt.cloud" target="_blank">📊 Metrics Telemetry</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Company & Support</h4>
+          <ul>
+            <li><a href="https://neuravolt.in" target="_blank">NeuraVolt Technologies</a></li>
+            <li><a href="https://neuravolt.in/privacy" target="_blank">Privacy Policy</a></li>
+            <li><a href="https://neuravolt.in/terms" target="_blank">Terms of Service</a></li>
+            <li><a href="mailto:info@neuravolt.in">info@neuravolt.in</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 NeuraVolt Cloud Services. All rights reserved. Powered by <a href="https://neuravolt.in" target="_blank">VOLTNOVATE SOLUTIONS LLP</a>.
+        </div>
+        <div>
+          <span>Autonomous Reliability • Zero Downtime • Continuous SRE Defense</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  
+  <!-- Lead Capture Modal (Hostinger Standard with OTP Verification) -->
+  <div id="leadModal" class="modal-backdrop" onclick="handleBackdropClick(event)">
+    <div class="lead-modal">
+      <button class="modal-close" onclick="closeLeadModal()">&times;</button>
+      
+      <!-- Form Content -->
+      <div id="modalFormContent">
+        <div class="modal-header">
+          <span class="service-pill" id="modalServiceBadge">Cloud Services</span>
+          <h3 id="modalTitle">Deploy Cloud Service</h3>
+          <p id="modalDesc">Enter your details to initiate instant provisioning and access your client credentials.</p>
+        </div>
+
+        <form id="leadCaptureForm" onsubmit="handleLeadSubmit(event)">
+          <div class="form-group">
+            <label for="leadName">Full Name / Organization *</label>
+            <input type="text" id="leadName" class="form-input" placeholder="e.g. Ajay Pratap / TechCorp" required>
+          </div>
+
+          <!-- Email with Integrated OTP Verification -->
+          <div class="form-group">
+            <label for="leadEmail">Work Email Address *</label>
+            <div style="display: flex; gap: 8px;">
+              <input type="email" id="leadEmail" class="form-input" placeholder="name@company.com" required style="flex: 1;">
+              <button type="button" id="sendOtpBtn" onclick="handleSendOtp()" class="btn btn-secondary" style="padding: 0 16px; font-size: 0.85rem; white-space: nowrap;">
+                Send OTP
+              </button>
+            </div>
+            <span id="otpStatusMsg" style="font-size: 0.78rem; margin-top: 4px; display: block; color: var(--text-subtle);"></span>
+            
+            <!-- OTP Verification Row -->
+            <div id="otpGroup" style="display: none; margin-top: 10px; background: var(--bg-subtle); padding: 12px; border-radius: 8px; border: 1px dashed var(--border);">
+              <label for="leadOtp" style="font-size: 0.8rem; font-weight: 600; color: var(--text); display: block; margin-bottom: 6px;">Enter 6-Digit Verification Code</label>
+              <div style="display: flex; gap: 8px;">
+                <input type="text" id="leadOtp" class="form-input" placeholder="123456" maxlength="6" style="letter-spacing: 4px; font-weight: 700; text-align: center; width: 140px;">
+                <button type="button" id="verifyOtpBtn" onclick="handleVerifyOtp()" class="btn btn-primary" style="padding: 0 16px; font-size: 0.85rem;">
+                  Verify OTP
+                </button>
+              </div>
+            </div>
+
+            <!-- Verified Badge -->
+            <div id="emailVerifiedBadge" style="display: none; color: #10B981; font-size: 0.85rem; font-weight: 600; margin-top: 8px; align-items: center; gap: 6px;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Email Verified Successfully</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="leadPhone">Phone / WhatsApp *</label>
+            <input type="tel" id="leadPhone" class="form-input" placeholder="+91 9876543210" required>
+          </div>
+
+          <!-- Context-Aware Dynamic Select -->
+          <div class="form-group">
+            <label for="leadService">Selected Plan / Service *</label>
+            <select id="leadService" class="form-select" required>
+              <!-- Populated dynamically -->
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="leadNotes">Custom Notes / Specs (Optional)</label>
+            <textarea id="leadNotes" class="form-textarea" placeholder="Provide any custom RAM, storage, or migration requirements..."></textarea>
+          </div>
+
+          <div class="modal-footer">
+            <button type="submit" id="submitLeadBtn" class="btn btn-primary" disabled style="opacity: 0.5; cursor: not-allowed;">
+              <span>Verify Email to Submit</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Success State -->
+      <div id="modalSuccessContent" class="modal-success" style="display: none;">
+        <div class="success-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h3>Request Confirmed!</h3>
+        <p>Your verified inquiry has been logged. An automated confirmation with full service specifications has been sent to your email. Our cloud engineering team will reach out shortly with access details.</p>
+        <button onclick="closeLeadModal()" class="btn btn-secondary">Close Window</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Shared JavaScript -->
+  <script>
+    function toggleFaq(button) {
+      const item = button.parentElement;
+      item.classList.toggle('active');
+    }
+
+    const SERVICE_CATEGORIES = {
+      hosting: {
+        badge: "NV Ultra Web Hosting",
+        title: "Deploy NV Ultra Web Hosting",
+        desc: "High-concurrency NVMe shared cloud powered by FastPanel and LiteSpeed/Nginx.",
+        options: [
+          { id: "hosting-starter", label: "Starter Web — ₹149/mo (1 Website, 10GB NVMe)" },
+          { id: "hosting-business", label: "Business Web — ₹299/mo (5 Websites, 50GB NVMe, Free SSL)", default: true },
+          { id: "hosting-agency", label: "Agency Pro — ₹599/mo (Unlimited Sites, 150GB NVMe, Dedicated IP)" }
+        ]
+      },
+      vps: {
+        badge: "Cloud VPS & Dedicated Compute",
+        title: "Provision Cloud VPS / Bare Metal",
+        desc: "Dedicated virtual CPU and raw compute with full root SSH control and 1Gbps uplink.",
+        options: [
+          { id: "vps-4g", label: "Cloud VPS 4G — ₹1,499/mo (2 vCPU, 4GB RAM, 80GB NVMe)" },
+          { id: "vps-8g", label: "Cloud VPS 8G — ₹2,799/mo (4 vCPU, 8GB RAM, 160GB NVMe)", default: true },
+          { id: "bare-metal", label: "Dedicated Bare Metal — ₹4,999/mo (8 Physical Cores, 32GB RAM, 500GB NVMe)" }
+        ]
+      },
+      nodes: {
+        badge: "Managed n8n Node",
+        title: "Deploy Managed n8n Node",
+        desc: "Fully managed n8n runtime with dedicated Docker resources and automated backups.",
+        options: [
+          { id: "n8n-basic", label: "n8n Basic — ₹999/mo (0.5 Core, 512MB RAM, 10GB NVMe)" },
+          { id: "n8n-pro", label: "n8n Pro Node — ₹1,999/mo (1.0 Core, 1GB RAM, 25GB NVMe)", default: true },
+          { id: "n8n-heavy", label: "n8n Heavy Enterprise — ₹3,999/mo (2.0 Cores, 2GB RAM, 50GB NVMe)" }
+        ]
+      },
+      guardian: {
+        badge: "Guardian SRE Autonomous Defense",
+        title: "Activate Guardian SRE Defense",
+        desc: "Autonomous monitoring, instant self-healing, and multi-channel incident alerts.",
+        options: [
+          { id: "guardian-audit", label: "SRE Vulnerability Audit — FREE (Comprehensive Server Audit)", default: true },
+          { id: "guardian-pro", label: "Guardian Pro — ₹1,999/mo (1-Sec Heartbeats, Auto-Remediation)" },
+          { id: "guardian-fleet", label: "Guardian Fleet Enterprise — Custom (Unlimited Nodes & SRE Engineers)" }
+        ]
+      }
+    };
+
+    let isEmailVerified = false;
+    let timerInterval = null;
+
+    function openLeadModal(categoryKey = 'nodes', planId = 'n8n-pro') {
+      const modal = document.getElementById('leadModal');
+      const category = SERVICE_CATEGORIES[categoryKey] || SERVICE_CATEGORIES['nodes'];
+
+      document.getElementById('modalServiceBadge').innerText = category.badge;
+      document.getElementById('modalTitle').innerText = category.title;
+      document.getElementById('modalDesc').innerText = category.desc;
+
+      const select = document.getElementById('leadService');
+      select.innerHTML = '';
+      category.options.forEach(opt => {
+        const option = document.createElement('option');
+        option.value = opt.id;
+        option.innerText = opt.label;
+        if (opt.id === planId || (!planId && opt.default)) {
+          option.selected = true;
+        }
+        select.appendChild(option);
+      });
+
+      document.getElementById('modalFormContent').style.display = 'block';
+      document.getElementById('modalSuccessContent').style.display = 'none';
+
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLeadModal() {
+      const modal = document.getElementById('leadModal');
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+      clearInterval(timerInterval);
+    }
+
+    function handleBackdropClick(e) {
+      if (e.target.id === 'leadModal') {
+        closeLeadModal();
+      }
+    }
+
+    function getApiBase() {
+      return (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+        ? 'http://localhost:3000/api'
+        : 'https://api.neuravolt.cloud';
+    }
+
+    async function apiPost(endpoint, data) {
+      const baseUrl = getApiBase();
+      const res = await fetch(baseUrl + endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      return await res.json();
+    }
+
+    function startOtpCountdown(seconds = 45) {
+      const sendBtn = document.getElementById('sendOtpBtn');
+      sendBtn.disabled = true;
+      let remaining = seconds;
+
+      sendBtn.innerText = 'Resend in ' + remaining + 's';
+
+      timerInterval = setInterval(() => {
+        remaining--;
+        if (remaining <= 0) {
+          clearInterval(timerInterval);
+          sendBtn.disabled = false;
+          sendBtn.innerText = 'Resend OTP';
+        } else {
+          sendBtn.innerText = 'Resend in ' + remaining + 's';
+        }
+      }, 1000);
+    }
+
+    async function handleSendOtp() {
+      const emailInput = document.getElementById('leadEmail');
+      const email = emailInput.value.trim();
+      const statusMsg = document.getElementById('otpStatusMsg');
+      const sendBtn = document.getElementById('sendOtpBtn');
+
+      if (!email || !email.includes('@') || !email.includes('.')) {
+        alert('Please enter a valid work email address first.');
+        emailInput.focus();
+        return;
+      }
+
+      sendBtn.disabled = true;
+      sendBtn.innerText = 'Sending...';
+      statusMsg.style.display = 'block';
+      statusMsg.style.color = '#0284C7';
+      statusMsg.innerText = 'Sending 6-digit verification code to your email...';
+
+      try {
+        const result = await apiPost('/leads/send-otp', { email });
+        if (result && result.success) {
+          statusMsg.style.color = '#10B981';
+          statusMsg.innerHTML = '<strong>✓ OTP Sent!</strong> Please check your inbox.';
+          document.getElementById('otpGroup').style.display = 'block';
+          document.getElementById('leadOtp').focus();
+          startOtpCountdown(45);
+        } else {
+          statusMsg.style.color = '#EF4444';
+          statusMsg.innerText = result.message || 'Failed to send OTP.';
+          sendBtn.disabled = false;
+          sendBtn.innerText = 'Send OTP';
+        }
+      } catch (err) {
+        statusMsg.style.color = '#EF4444';
+        statusMsg.innerText = err.message || 'Network error sending OTP.';
+        sendBtn.disabled = false;
+        sendBtn.innerText = 'Send OTP';
+      }
+    }
+
+    async function handleVerifyOtp() {
+      const email = document.getElementById('leadEmail').value.trim();
+      const otpInput = document.getElementById('leadOtp');
+      const otp = otpInput.value.trim();
+      const statusMsg = document.getElementById('otpStatusMsg');
+      const verifyBtn = document.getElementById('verifyOtpBtn');
+
+      if (!otp || otp.length < 6) {
+        alert('Please enter the 6-digit OTP code.');
+        otpInput.focus();
+        return;
+      }
+
+      verifyBtn.disabled = true;
+      verifyBtn.innerText = 'Checking...';
+
+      try {
+        const result = await apiPost('/leads/verify-otp', { email, otp });
+        if (result && result.verified) {
+          isEmailVerified = true;
+          clearInterval(timerInterval);
+
+          document.getElementById('otpGroup').style.display = 'none';
+          document.getElementById('sendOtpBtn').style.display = 'none';
+          document.getElementById('leadEmail').readOnly = true;
+
+          const badge = document.getElementById('emailVerifiedBadge');
+          badge.style.display = 'flex';
+
+          statusMsg.style.display = 'none';
+
+          const submitBtn = document.getElementById('submitLeadBtn');
+          submitBtn.disabled = false;
+          submitBtn.style.opacity = '1';
+          submitBtn.style.cursor = 'pointer';
+          submitBtn.innerHTML = '<span>Confirm & Deploy Service</span>';
+        } else {
+          statusMsg.style.display = 'block';
+          statusMsg.style.color = '#EF4444';
+          statusMsg.innerText = result.message || 'Invalid verification code.';
+          verifyBtn.disabled = false;
+          verifyBtn.innerText = 'Verify OTP';
+        }
+      } catch (err) {
+        statusMsg.style.display = 'block';
+        statusMsg.style.color = '#EF4444';
+        statusMsg.innerText = err.message || 'Verification failed.';
+        verifyBtn.disabled = false;
+        verifyBtn.innerText = 'Verify OTP';
+      }
+    }
+
+    async function handleLeadSubmit(e) {
+      e.preventDefault();
+
+      if (!isEmailVerified) {
+        alert('Please verify your email with the 6-digit OTP first.');
+        document.getElementById('leadEmail').focus();
+        return;
+      }
+
+      const submitBtn = document.getElementById('submitLeadBtn');
+      submitBtn.disabled = true;
+      submitBtn.innerText = 'Submitting Request...';
+
+      const payload = {
+        name: document.getElementById('leadName').value.trim(),
+        email: document.getElementById('leadEmail').value.trim(),
+        phone: document.getElementById('leadPhone').value.trim(),
+        service: document.getElementById('leadService').value,
+        website: window.location.hostname,
+        notes: document.getElementById('leadNotes').value.trim()
+      };
+
+      try {
+        const data = await apiPost('/leads/capture', payload);
+        if (data && (data.success || data.leadId)) {
+          document.getElementById('modalFormContent').style.display = 'none';
+          document.getElementById('modalSuccessContent').style.display = 'block';
+          document.getElementById('leadCaptureForm').reset();
+          isEmailVerified = false;
+        } else {
+          alert('Submission note: ' + (data.message || 'Please verify your information.'));
+          submitBtn.disabled = false;
+          submitBtn.innerText = 'Confirm & Deploy Service';
+        }
+      } catch (err) {
+        console.error('Lead submission error:', err);
+        alert('Could not submit lead: ' + err.message);
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'Confirm & Deploy Service';
+      }
+    }
+  </script>
+</body>
+</html>
+
+</body>
+</html>

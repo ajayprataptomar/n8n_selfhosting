@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>High-Performance NVMe Cloud VPS & Dedicated Compute Servers India | Root SSH | NeuraVolt Cloud</title>
+  <meta name="description" content="Deploy high-frequency NVMe Cloud VPS and Bare Metal compute in India. 1Gbps unmetered port, dedicated AMD EPYC / Intel Xeon vCPUs, clean static IPv4, full root SSH, and 99.99% uptime SLA.">
+  <link rel="canonical" href="https://neuravolt.cloud/cloud-vps">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="High-Performance NVMe Cloud VPS & Dedicated Compute Servers India | Root SSH | NeuraVolt Cloud">
+  <meta property="og:description" content="Deploy high-frequency NVMe Cloud VPS and Bare Metal compute in India. 1Gbps unmetered port, dedicated AMD EPYC / Intel Xeon vCPUs, clean static IPv4, full root SSH, and 99.99% uptime SLA.">
+  <meta property="og:url" content="https://neuravolt.cloud/cloud-vps">
+  <meta property="og:type" content="product">
+  <meta property="og:site_name" content="NeuraVolt Cloud Services">
+  <meta property="og:image" content="https://neuravolt.cloud/assets/logos/neuravolt_cloud_logo.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="High-Performance NVMe Cloud VPS & Dedicated Compute Servers India | Root SSH | NeuraVolt Cloud">
+  <meta name="twitter:description" content="Deploy high-frequency NVMe Cloud VPS and Bare Metal compute in India. 1Gbps unmetered port, dedicated AMD EPYC / Intel Xeon vCPUs, clean static IPv4, full root SSH, and 99.99% uptime SLA.">
+  <meta name="twitter:image" content="https://neuravolt.cloud/assets/logos/neuravolt_cloud_logo.png">
+
+  <!-- Favicons & Styles -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="assets/favicon.png?v=3">
+  <link rel="shortcut icon" href="assets/favicon.ico?v=3">
+  <link rel="apple-touch-icon" href="assets/favicon.png?v=3">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "VirtualPrivateServer",
+      "name": "Enterprise Bare Metal & KVM Virtualization",
+      "description": "Deploy high-frequency NVMe Cloud VPS and Bare Metal compute in India. 1Gbps unmetered port, dedicated AMD EPYC / Intel Xeon vCPUs, clean static IPv4, full root SSH, and 99.99% uptime SLA.",
+      "brand": {
+        "@type": "Brand",
+        "name": "NeuraVolt Cloud Services"
+      },
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "INR",
+        "lowPrice": "1499",
+        "offerCount": "3"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://neuravolt.cloud/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Enterprise Bare Metal & KVM Virtualization",
+          "item": "https://neuravolt.cloud/cloud-vps"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Do I get dedicated IPv4 and full root access?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, every NeuraVolt Cloud VPS includes a dedicated static clean IPv4 address and full root SSH credentials. You have complete administrative control over the machine."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which operating systems are supported?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We provide one-click instant images for Ubuntu 22.04 / 24.04 LTS, Debian 12, AlmaLinux 9, Rocky Linux, and custom ISO mounting upon request."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I scale CPU and RAM as my application grows?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Absolutely. You can seamlessly resize your VPS CPU, RAM, and NVMe disk without losing your IP address or reinstalling your operating system."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where are your physical server datacenters located?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our primary compute clusters are located in Tier-4 certified enterprise datacenters in Mumbai and Bangalore, India, offering direct NIXI peering and enterprise hardware firewalls."
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+
+  
+  <!-- Header / Navigation -->
+  <header>
+    <div class="container nav-wrapper">
+      <a href="index.html" class="logo-brand">
+        <img src="assets/logos/neuravolt_cloud_logo.png" alt="NeuraVolt Cloud Services">
+      </a>
+      
+      <ul class="nav-links">
+        <li><a href="cloud-hosting.html" class="">Cloud Hosting</a></li>
+        <li><a href="cloud-vps.html" class="active-nav">VPS & Compute</a></li>
+        <li><a href="managed-n8n.html" class="">Managed n8n</a></li>
+        <li><a href="guardian-sre.html" class="">Guardian SRE</a></li>
+        <li><a href="index.html#pricing">All Plans</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="https://app.neuravolt.cloud" target="_blank" class="btn btn-secondary btn-sm">Client Login</a>
+        <a href="#pricing" class="btn btn-primary btn-sm">Deploy Now</a>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- Hero Section -->
+  <section class="hero container">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span>/</span>
+      <a href="index.html#pricing">Infrastructure Products</a>
+      <span>/</span>
+      <span class="current">Enterprise Bare Metal & KVM Virtualization</span>
+    </div>
+
+    <div class="hero-badge">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      <span>Enterprise Bare Metal & KVM Virtualization</span>
+    </div>
+
+    <h1>High-Frequency NVMe Cloud VPS & Compute.<br><span class="gradient-text">Raw Power, Dedicated Resources & 1Gbps Uplink.</span></h1>
+    <p class="hero-subtitle">Spin up dedicated KVM virtual private servers and raw bare-metal hardware with full root SSH control. Engineered for Docker stacks, production databases, microservices, and AI model inference.</p>
+
+    <div class="hero-actions">
+      <a href="#pricing" class="btn btn-primary">Provision VPS Instance →</a>
+      <button onclick="openLeadModal('vps')" class="btn btn-secondary">Request Custom Quote</button>
+    </div>
+  </section>
+
+  <!-- Pricing Cards Section -->
+  <section id="pricing" class="pricing-section container">
+    <div class="section-header">
+      <span class="section-tag">Enterprise Bare Metal & KVM Virtualization Plans & Pricing</span>
+      <h2>Select Your Optimized Specification</h2>
+      <p>Instant provisioning, transparent billing, and 100% NVMe performance standard on every tier.</p>
+    </div>
+
+    <div class="pricing-grid">
+      
+        <div class="price-card ">
+          
+          <div class="price-header">
+            <h3>Cloud VPS 4G</h3>
+            <p class="plan-desc">For modern backend APIs, microservices, and medium traffic production applications.</p>
+          </div>
+          <div class="price-value">₹1,499<span>/month</span></div>
+          <ul class="price-specs">
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>2 High-Frequency vCPUs</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>4 GB Dedicated ECC RAM</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>80 GB Gen4 NVMe Storage</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Full Root Access via SSH</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>1 Dedicated Clean IPv4</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>1 Gbps High-Throughput Port</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Ubuntu / Debian / AlmaLinux OS</span></li>
+          </ul>
+          <button onclick="openLeadModal('vps', 'vps-4g')" class="btn btn-secondary">Provision VPS 4G</button>
+        </div>
+  
+        <div class="price-card featured">
+          <div class="featured-ribbon">Recommended</div>
+          <div class="price-header">
+            <h3>Cloud VPS 8G</h3>
+            <p class="plan-desc">For production databases, heavy Docker stacks, enterprise ERP, and high-concurrency SaaS.</p>
+          </div>
+          <div class="price-value">₹2,799<span>/month</span></div>
+          <ul class="price-specs">
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>4 High-Frequency vCPUs</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>8 GB Dedicated ECC RAM</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>160 GB Gen4 NVMe Storage</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>1 Gbps Unmetered Port</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Automated Weekly Snapshot Backups</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Guardian Autonomous SRE Monitor</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Custom Reverse DNS (rDNS)</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Priority Engineering Assistance</span></li>
+          </ul>
+          <button onclick="openLeadModal('vps', 'vps-8g')" class="btn btn-primary">Provision VPS 8G</button>
+        </div>
+  
+        <div class="price-card ">
+          
+          <div class="price-header">
+            <h3>Dedicated Bare Metal</h3>
+            <p class="plan-desc">For enterprise workloads requiring 100% physically isolated bare metal hardware.</p>
+          </div>
+          <div class="price-value">₹4,999<span>/month</span></div>
+          <ul class="price-specs">
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>8 Dedicated Physical Cores</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>32 GB ECC DDR4/DDR5 RAM</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>500 GB NVMe Mirror (RAID 1)</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Out-of-Band IPMI / KVM Access</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Hardware DDoS Protection</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Custom Network Routing & SLA</span></li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Dedicated SRE Technical Account Lead</span></li>
+          </ul>
+          <button onclick="openLeadModal('vps', 'bare-metal')" class="btn btn-secondary">Deploy Bare Metal</button>
+        </div>
+  
+    </div>
+  </section>
+
+  <!-- Technical Features Showcase -->
+  <section class="container" style="margin-top: 5rem; margin-bottom: 5rem;">
+    <div class="section-header">
+      <span class="section-tag">Engineering Advantages</span>
+      <h2>Built for Extreme Concurrency & Throughput</h2>
+      <p>Why leading engineering teams choose NeuraVolt Cloud over legacy providers.</p>
+    </div>
+
+    <div class="feature-showcase-grid">
+      
+        <div class="showcase-card">
+          <div class="showcase-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><line x1="6" x2="6.01" y1="6" y2="6"/><line x1="6" x2="6.01" y1="18" y2="18"/></svg></div>
+          <h3>100% Dedicated Compute Slices</h3>
+          <p>Zero CPU stealing or memory overcommit. Your virtual CPU cores and RAM are physically reserved on enterprise AMD EPYC and Intel Xeon Scalable hardware.</p>
+        </div>
+  
+        <div class="showcase-card">
+          <div class="showcase-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg></div>
+          <h3>1 Gbps Ultra-Low Latency Uplink</h3>
+          <p>Direct peering with major Indian internet exchanges (NIXI, Extreme IX) ensuring sub-15ms round-trip times to Mumbai, Delhi, Bangalore, and Hyderabad.</p>
+        </div>
+  
+        <div class="showcase-card">
+          <div class="showcase-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" x2="20" y1="19" y2="19"/></svg></div>
+          <h3>Full Root Access & Custom Kernels</h3>
+          <p>Total control over your operating system. Install Docker, Kubernetes, wireguard, custom firewalls, or swap kernel parameters without cloud provider locks.</p>
+        </div>
+  
+        <div class="showcase-card">
+          <div class="showcase-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <h3>Pre-Installed BYOVPS Guardian Agent</h3>
+          <p>Every VPS instance connects seamlessly to the NeuraVolt Guardian Dashboard, offering real-time memory leak detection, automated service recovery, and alert routing.</p>
+        </div>
+  
+    </div>
+  </section>
+
+  <!-- Architectural Comparison Table -->
+  <section class="container" style="margin-bottom: 5rem;">
+    <div class="section-header">
+      <span class="section-tag">Direct Benchmarks</span>
+      <h2>NeuraVolt Cloud vs Industry Alternatives</h2>
+      <p>Clear architectural differentiation with zero marketing fluff.</p>
+    </div>
+
+    <div class="specs-table-wrapper">
+      <table class="specs-table">
+        <thead>
+          <tr>
+            <th>Architecture Dimension</th>
+            <th style="color: var(--primary);">NeuraVolt Cloud</th>
+            <th>Traditional Shared / AWS</th>
+            <th>Budget Providers</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr>
+            <td><strong>Compute CPU Guarantee</strong></td>
+            <td style="color: var(--primary); font-weight: 700;">100% Dedicated vCPU</td>
+            <td>Shared Burstable (EC2 t3)</td>
+            <td>Shared KVM</td>
+          </tr>
+  
+          <tr>
+            <td><strong>Storage Technology</strong></td>
+            <td style="color: var(--primary); font-weight: 700;">Direct Gen4 NVMe</td>
+            <td>EBS Network Attached Disk</td>
+            <td>Standard SSD</td>
+          </tr>
+  
+          <tr>
+            <td><strong>Network Outbound Pricing</strong></td>
+            <td style="color: var(--primary); font-weight: 700;">Unmetered Fair-Use</td>
+            <td>$0.09 per GB (Expensive)</td>
+            <td>Strict Capped Bandwidth</td>
+          </tr>
+  
+          <tr>
+            <td><strong>Autonomous SRE Remediation</strong></td>
+            <td style="color: var(--primary); font-weight: 700;">Built-in Standard</td>
+            <td>CloudWatch (Costly & DIY)</td>
+            <td>Manual Intervention</td>
+          </tr>
+  
+          <tr>
+            <td><strong>Provisioning Speed</strong></td>
+            <td style="color: var(--primary); font-weight: 700;">< 60 Seconds</td>
+            <td>2 - 5 Minutes</td>
+            <td>5 - 10 Minutes</td>
+          </tr>
+  
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Frequently Asked Questions -->
+  <section class="container" style="margin-bottom: 5rem;">
+    <div class="section-header">
+      <span class="section-tag">Knowledge Base & FAQ</span>
+      <h2>Got Questions? We Have Answers.</h2>
+      <p>Everything you need to know about provisioning, migration, SLAs, and technical support.</p>
+    </div>
+
+    <div class="faq-container">
+      
+      <div class="faq-item active">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Do I get dedicated IPv4 and full root access?</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Yes, every NeuraVolt Cloud VPS includes a dedicated static clean IPv4 address and full root SSH credentials. You have complete administrative control over the machine.</p>
+        </div>
+      </div>
+  
+      <div class="faq-item ">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Which operating systems are supported?</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>We provide one-click instant images for Ubuntu 22.04 / 24.04 LTS, Debian 12, AlmaLinux 9, Rocky Linux, and custom ISO mounting upon request.</p>
+        </div>
+      </div>
+  
+      <div class="faq-item ">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Can I scale CPU and RAM as my application grows?</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Absolutely. You can seamlessly resize your VPS CPU, RAM, and NVMe disk without losing your IP address or reinstalling your operating system.</p>
+        </div>
+      </div>
+  
+      <div class="faq-item ">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Where are your physical server datacenters located?</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Our primary compute clusters are located in Tier-4 certified enterprise datacenters in Mumbai and Bangalore, India, offering direct NIXI peering and enterprise hardware firewalls.</p>
+        </div>
+      </div>
+  
+    </div>
+  </section>
+
+  <!-- High-Impact Conversion Banner -->
+  <section class="container" style="margin-bottom: 5rem;">
+    <div style="background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%); border-radius: 20px; padding: 48px; color: white; text-align: center; box-shadow: var(--shadow-lg); border: 1px solid rgba(255,85,0,0.2);">
+      <span style="background: rgba(255,85,0,0.2); color: #FF7722; padding: 6px 14px; border-radius: 9999px; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; display: inline-block; margin-bottom: 16px;">Ready to Scale?</span>
+      <h2 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 12px; color: white;">Experience Sub-Millisecond Cloud Infrastructure</h2>
+      <p style="color: #94A3B8; max-width: 650px; margin: 0 auto 28px; font-size: 0.95rem;">Join forward-thinking agencies, developers, and enterprises deployed on NeuraVolt Cloud.</p>
+      <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+        <button onclick="openLeadModal('vps')" class="btn btn-primary" style="padding: 14px 28px; font-size: 0.95rem;">Deploy Instant Instance →</button>
+        <a href="index.html" class="btn btn-secondary" style="background: rgba(255,255,255,0.08); color: white; border-color: rgba(255,255,255,0.15); padding: 14px 24px;">Explore All Products</a>
+      </div>
+    </div>
+  </section>
+
+  
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="assets/logos/neuravolt_cloud_logo_dark.png?v=4" alt="NeuraVolt Cloud Services" style="height: 44px; max-width: 220px; object-fit: contain; margin-bottom: 8px;">
+          <p>Next-generation autonomous cloud infrastructure, high-frequency compute, and self-healing reliability engineered for modern enterprises.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Dedicated Products</h4>
+          <ul>
+            <li><a href="cloud-hosting.html">High-Speed Cloud Web Hosting</a></li>
+            <li><a href="cloud-vps.html">Cloud VPS & Dedicated Compute</a></li>
+            <li><a href="managed-n8n.html">Managed n8n Automation Nodes</a></li>
+            <li><a href="guardian-sre.html">Guardian SRE Self-Healing Watchdog</a></li>
+            <li><a href="index.html#pricing">All Infrastructure Pricing</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Customer Portals</h4>
+          <ul>
+            <li><a href="https://app.neuravolt.cloud" target="_blank" style="color: #FF7722; font-weight: 600;">🚀 Client Portal (n8n)</a></li>
+            <li><a href="https://reach.neuravolt.cloud" target="_blank">⚡ NeuraVolt Reach</a></li>
+            <li><a href="https://monitor.neuravolt.cloud" target="_blank">📊 Metrics Telemetry</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Company & Support</h4>
+          <ul>
+            <li><a href="https://neuravolt.in" target="_blank">NeuraVolt Technologies</a></li>
+            <li><a href="https://neuravolt.in/privacy" target="_blank">Privacy Policy</a></li>
+            <li><a href="https://neuravolt.in/terms" target="_blank">Terms of Service</a></li>
+            <li><a href="mailto:info@neuravolt.in">info@neuravolt.in</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 NeuraVolt Cloud Services. All rights reserved. Powered by <a href="https://neuravolt.in" target="_blank">VOLTNOVATE SOLUTIONS LLP</a>.
+        </div>
+        <div>
+          <span>Autonomous Reliability • Zero Downtime • Continuous SRE Defense</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  
+  <!-- Lead Capture Modal (Hostinger Standard with OTP Verification) -->
+  <div id="leadModal" class="modal-backdrop" onclick="handleBackdropClick(event)">
+    <div class="lead-modal">
+      <button class="modal-close" onclick="closeLeadModal()">&times;</button>
+      
+      <!-- Form Content -->
+      <div id="modalFormContent">
+        <div class="modal-header">
+          <span class="service-pill" id="modalServiceBadge">Cloud Services</span>
+          <h3 id="modalTitle">Deploy Cloud Service</h3>
+          <p id="modalDesc">Enter your details to initiate instant provisioning and access your client credentials.</p>
+        </div>
+
+        <form id="leadCaptureForm" onsubmit="handleLeadSubmit(event)">
+          <div class="form-group">
+            <label for="leadName">Full Name / Organization *</label>
+            <input type="text" id="leadName" class="form-input" placeholder="e.g. Ajay Pratap / TechCorp" required>
+          </div>
+
+          <!-- Email with Integrated OTP Verification -->
+          <div class="form-group">
+            <label for="leadEmail">Work Email Address *</label>
+            <div style="display: flex; gap: 8px;">
+              <input type="email" id="leadEmail" class="form-input" placeholder="name@company.com" required style="flex: 1;">
+              <button type="button" id="sendOtpBtn" onclick="handleSendOtp()" class="btn btn-secondary" style="padding: 0 16px; font-size: 0.85rem; white-space: nowrap;">
+                Send OTP
+              </button>
+            </div>
+            <span id="otpStatusMsg" style="font-size: 0.78rem; margin-top: 4px; display: block; color: var(--text-subtle);"></span>
+            
+            <!-- OTP Verification Row -->
+            <div id="otpGroup" style="display: none; margin-top: 10px; background: var(--bg-subtle); padding: 12px; border-radius: 8px; border: 1px dashed var(--border);">
+              <label for="leadOtp" style="font-size: 0.8rem; font-weight: 600; color: var(--text); display: block; margin-bottom: 6px;">Enter 6-Digit Verification Code</label>
+              <div style="display: flex; gap: 8px;">
+                <input type="text" id="leadOtp" class="form-input" placeholder="123456" maxlength="6" style="letter-spacing: 4px; font-weight: 700; text-align: center; width: 140px;">
+                <button type="button" id="verifyOtpBtn" onclick="handleVerifyOtp()" class="btn btn-primary" style="padding: 0 16px; font-size: 0.85rem;">
+                  Verify OTP
+                </button>
+              </div>
+            </div>
+
+            <!-- Verified Badge -->
+            <div id="emailVerifiedBadge" style="display: none; color: #10B981; font-size: 0.85rem; font-weight: 600; margin-top: 8px; align-items: center; gap: 6px;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Email Verified Successfully</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="leadPhone">Phone / WhatsApp *</label>
+            <input type="tel" id="leadPhone" class="form-input" placeholder="+91 9876543210" required>
+          </div>
+
+          <!-- Context-Aware Dynamic Select -->
+          <div class="form-group">
+            <label for="leadService">Selected Plan / Service *</label>
+            <select id="leadService" class="form-select" required>
+              <!-- Populated dynamically -->
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="leadNotes">Custom Notes / Specs (Optional)</label>
+            <textarea id="leadNotes" class="form-textarea" placeholder="Provide any custom RAM, storage, or migration requirements..."></textarea>
+          </div>
+
+          <div class="modal-footer">
+            <button type="submit" id="submitLeadBtn" class="btn btn-primary" disabled style="opacity: 0.5; cursor: not-allowed;">
+              <span>Verify Email to Submit</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Success State -->
+      <div id="modalSuccessContent" class="modal-success" style="display: none;">
+        <div class="success-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h3>Request Confirmed!</h3>
+        <p>Your verified inquiry has been logged. An automated confirmation with full service specifications has been sent to your email. Our cloud engineering team will reach out shortly with access details.</p>
+        <button onclick="closeLeadModal()" class="btn btn-secondary">Close Window</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Shared JavaScript -->
+  <script>
+    function toggleFaq(button) {
+      const item = button.parentElement;
+      item.classList.toggle('active');
+    }
+
+    const SERVICE_CATEGORIES = {
+      hosting: {
+        badge: "NV Ultra Web Hosting",
+        title: "Deploy NV Ultra Web Hosting",
+        desc: "High-concurrency NVMe shared cloud powered by FastPanel and LiteSpeed/Nginx.",
+        options: [
+          { id: "hosting-starter", label: "Starter Web — ₹149/mo (1 Website, 10GB NVMe)" },
+          { id: "hosting-business", label: "Business Web — ₹299/mo (5 Websites, 50GB NVMe, Free SSL)", default: true },
+          { id: "hosting-agency", label: "Agency Pro — ₹599/mo (Unlimited Sites, 150GB NVMe, Dedicated IP)" }
+        ]
+      },
+      vps: {
+        badge: "Cloud VPS & Dedicated Compute",
+        title: "Provision Cloud VPS / Bare Metal",
+        desc: "Dedicated virtual CPU and raw compute with full root SSH control and 1Gbps uplink.",
+        options: [
+          { id: "vps-4g", label: "Cloud VPS 4G — ₹1,499/mo (2 vCPU, 4GB RAM, 80GB NVMe)" },
+          { id: "vps-8g", label: "Cloud VPS 8G — ₹2,799/mo (4 vCPU, 8GB RAM, 160GB NVMe)", default: true },
+          { id: "bare-metal", label: "Dedicated Bare Metal — ₹4,999/mo (8 Physical Cores, 32GB RAM, 500GB NVMe)" }
+        ]
+      },
+      nodes: {
+        badge: "Managed n8n Node",
+        title: "Deploy Managed n8n Node",
+        desc: "Fully managed n8n runtime with dedicated Docker resources and automated backups.",
+        options: [
+          { id: "n8n-basic", label: "n8n Basic — ₹999/mo (0.5 Core, 512MB RAM, 10GB NVMe)" },
+          { id: "n8n-pro", label: "n8n Pro Node — ₹1,999/mo (1.0 Core, 1GB RAM, 25GB NVMe)", default: true },
+          { id: "n8n-heavy", label: "n8n Heavy Enterprise — ₹3,999/mo (2.0 Cores, 2GB RAM, 50GB NVMe)" }
+        ]
+      },
+      guardian: {
+        badge: "Guardian SRE Autonomous Defense",
+        title: "Activate Guardian SRE Defense",
+        desc: "Autonomous monitoring, instant self-healing, and multi-channel incident alerts.",
+        options: [
+          { id: "guardian-audit", label: "SRE Vulnerability Audit — FREE (Comprehensive Server Audit)", default: true },
+          { id: "guardian-pro", label: "Guardian Pro — ₹1,999/mo (1-Sec Heartbeats, Auto-Remediation)" },
+          { id: "guardian-fleet", label: "Guardian Fleet Enterprise — Custom (Unlimited Nodes & SRE Engineers)" }
+        ]
+      }
+    };
+
+    let isEmailVerified = false;
+    let timerInterval = null;
+
+    function openLeadModal(categoryKey = 'vps', planId = 'vps-8g') {
+      const modal = document.getElementById('leadModal');
+      const category = SERVICE_CATEGORIES[categoryKey] || SERVICE_CATEGORIES['vps'];
+
+      document.getElementById('modalServiceBadge').innerText = category.badge;
+      document.getElementById('modalTitle').innerText = category.title;
+      document.getElementById('modalDesc').innerText = category.desc;
+
+      const select = document.getElementById('leadService');
+      select.innerHTML = '';
+      category.options.forEach(opt => {
+        const option = document.createElement('option');
+        option.value = opt.id;
+        option.innerText = opt.label;
+        if (opt.id === planId || (!planId && opt.default)) {
+          option.selected = true;
+        }
+        select.appendChild(option);
+      });
+
+      document.getElementById('modalFormContent').style.display = 'block';
+      document.getElementById('modalSuccessContent').style.display = 'none';
+
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLeadModal() {
+      const modal = document.getElementById('leadModal');
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+      clearInterval(timerInterval);
+    }
+
+    function handleBackdropClick(e) {
+      if (e.target.id === 'leadModal') {
+        closeLeadModal();
+      }
+    }
+
+    function getApiBase() {
+      return (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+        ? 'http://localhost:3000/api'
+        : 'https://api.neuravolt.cloud';
+    }
+
+    async function apiPost(endpoint, data) {
+      const baseUrl = getApiBase();
+      const res = await fetch(baseUrl + endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      return await res.json();
+    }
+
+    function startOtpCountdown(seconds = 45) {
+      const sendBtn = document.getElementById('sendOtpBtn');
+      sendBtn.disabled = true;
+      let remaining = seconds;
+
+      sendBtn.innerText = 'Resend in ' + remaining + 's';
+
+      timerInterval = setInterval(() => {
+        remaining--;
+        if (remaining <= 0) {
+          clearInterval(timerInterval);
+          sendBtn.disabled = false;
+          sendBtn.innerText = 'Resend OTP';
+        } else {
+          sendBtn.innerText = 'Resend in ' + remaining + 's';
+        }
+      }, 1000);
+    }
+
+    async function handleSendOtp() {
+      const emailInput = document.getElementById('leadEmail');
+      const email = emailInput.value.trim();
+      const statusMsg = document.getElementById('otpStatusMsg');
+      const sendBtn = document.getElementById('sendOtpBtn');
+
+      if (!email || !email.includes('@') || !email.includes('.')) {
+        alert('Please enter a valid work email address first.');
+        emailInput.focus();
+        return;
+      }
+
+      sendBtn.disabled = true;
+      sendBtn.innerText = 'Sending...';
+      statusMsg.style.display = 'block';
+      statusMsg.style.color = '#0284C7';
+      statusMsg.innerText = 'Sending 6-digit verification code to your email...';
+
+      try {
+        const result = await apiPost('/leads/send-otp', { email });
+        if (result && result.success) {
+          statusMsg.style.color = '#10B981';
+          statusMsg.innerHTML = '<strong>✓ OTP Sent!</strong> Please check your inbox.';
+          document.getElementById('otpGroup').style.display = 'block';
+          document.getElementById('leadOtp').focus();
+          startOtpCountdown(45);
+        } else {
+          statusMsg.style.color = '#EF4444';
+          statusMsg.innerText = result.message || 'Failed to send OTP.';
+          sendBtn.disabled = false;
+          sendBtn.innerText = 'Send OTP';
+        }
+      } catch (err) {
+        statusMsg.style.color = '#EF4444';
+        statusMsg.innerText = err.message || 'Network error sending OTP.';
+        sendBtn.disabled = false;
+        sendBtn.innerText = 'Send OTP';
+      }
+    }
+
+    async function handleVerifyOtp() {
+      const email = document.getElementById('leadEmail').value.trim();
+      const otpInput = document.getElementById('leadOtp');
+      const otp = otpInput.value.trim();
+      const statusMsg = document.getElementById('otpStatusMsg');
+      const verifyBtn = document.getElementById('verifyOtpBtn');
+
+      if (!otp || otp.length < 6) {
+        alert('Please enter the 6-digit OTP code.');
+        otpInput.focus();
+        return;
+      }
+
+      verifyBtn.disabled = true;
+      verifyBtn.innerText = 'Checking...';
+
+      try {
+        const result = await apiPost('/leads/verify-otp', { email, otp });
+        if (result && result.verified) {
+          isEmailVerified = true;
+          clearInterval(timerInterval);
+
+          document.getElementById('otpGroup').style.display = 'none';
+          document.getElementById('sendOtpBtn').style.display = 'none';
+          document.getElementById('leadEmail').readOnly = true;
+
+          const badge = document.getElementById('emailVerifiedBadge');
+          badge.style.display = 'flex';
+
+          statusMsg.style.display = 'none';
+
+          const submitBtn = document.getElementById('submitLeadBtn');
+          submitBtn.disabled = false;
+          submitBtn.style.opacity = '1';
+          submitBtn.style.cursor = 'pointer';
+          submitBtn.innerHTML = '<span>Confirm & Deploy Service</span>';
+        } else {
+          statusMsg.style.display = 'block';
+          statusMsg.style.color = '#EF4444';
+          statusMsg.innerText = result.message || 'Invalid verification code.';
+          verifyBtn.disabled = false;
+          verifyBtn.innerText = 'Verify OTP';
+        }
+      } catch (err) {
+        statusMsg.style.display = 'block';
+        statusMsg.style.color = '#EF4444';
+        statusMsg.innerText = err.message || 'Verification failed.';
+        verifyBtn.disabled = false;
+        verifyBtn.innerText = 'Verify OTP';
+      }
+    }
+
+    async function handleLeadSubmit(e) {
+      e.preventDefault();
+
+      if (!isEmailVerified) {
+        alert('Please verify your email with the 6-digit OTP first.');
+        document.getElementById('leadEmail').focus();
+        return;
+      }
+
+      const submitBtn = document.getElementById('submitLeadBtn');
+      submitBtn.disabled = true;
+      submitBtn.innerText = 'Submitting Request...';
+
+      const payload = {
+        name: document.getElementById('leadName').value.trim(),
+        email: document.getElementById('leadEmail').value.trim(),
+        phone: document.getElementById('leadPhone').value.trim(),
+        service: document.getElementById('leadService').value,
+        website: window.location.hostname,
+        notes: document.getElementById('leadNotes').value.trim()
+      };
+
+      try {
+        const data = await apiPost('/leads/capture', payload);
+        if (data && (data.success || data.leadId)) {
+          document.getElementById('modalFormContent').style.display = 'none';
+          document.getElementById('modalSuccessContent').style.display = 'block';
+          document.getElementById('leadCaptureForm').reset();
+          isEmailVerified = false;
+        } else {
+          alert('Submission note: ' + (data.message || 'Please verify your information.'));
+          submitBtn.disabled = false;
+          submitBtn.innerText = 'Confirm & Deploy Service';
+        }
+      } catch (err) {
+        console.error('Lead submission error:', err);
+        alert('Could not submit lead: ' + err.message);
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'Confirm & Deploy Service';
+      }
+    }
+  </script>
+</body>
+</html>
+
+</body>
+</html>

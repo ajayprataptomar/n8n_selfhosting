@@ -1,10 +1,26 @@
 postgres-data/
 redis-data/
 node_modules/
+**/node_modules/
+**/vendor/
 .next/
 dist/
 .DS_Store
 .env
+**/.env
 secrets/
 traefik/letsencrypt/
 *.log
+*.zip
+*.apk
+
+# Storage caches and sessions
+**/storage/framework/cache/*
+**/storage/framework/sessions/*
+**/storage/framework/views/*
+**/storage/logs/*
+!**/storage/framework/cache/.gitignore
+!**/storage/framework/sessions/.gitignore
+!**/storage/framework/views/.gitignore
+!**/storage/logs/.gitignore
+

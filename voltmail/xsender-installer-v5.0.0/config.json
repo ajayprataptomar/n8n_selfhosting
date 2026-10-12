@@ -1,0 +1,96 @@
+{
+    "version": "5.0.0",
+    "include_vendor": false,
+    "migrations": {
+        "4.1": [],
+        "4.2": [
+            "database/migrations/2025_01_11_000001_create_lead_generation_tables.php",
+            "database/migrations/2025_04_30_070800_create_personal_access_tokens_table.php",
+            "database/migrations/2025_04_30_071258_add_api_gateway_preferences_to_users_table.php",
+            "database/migrations/2026_01_11_000001_add_lead_generation_to_pricing_plans_table.php",
+            "database/migrations/2026_01_11_000002_add_api_docs_url_to_lead_generation_settings_table.php",
+            "database/migrations/2026_01_12_000001_create_automation_workflow_tables.php",
+            "database/migrations/2026_01_12_000002_create_workflow_templates_table.php",
+            "database/migrations/2026_01_14_000001_add_automation_to_pricing_plans_table.php",
+            "database/migrations/2026_01_15_172305_create_plan_display_features_tables.php",
+            "database/migrations/2026_01_17_224557_create_meta_configurations_table.php",
+            "database/migrations/2026_01_17_224601_create_whatsapp_client_onboardings_table.php",
+            "database/migrations/2026_01_17_224604_add_meta_enterprise_fields_to_gateways_table.php",
+            "database/migrations/2026_01_18_014630_migrate_legacy_meta_settings_to_meta_configuration.php",
+            "database/migrations/2026_01_20_000001_create_unified_campaigns_table.php",
+            "database/migrations/2026_01_20_000002_create_campaign_messages_table.php",
+            "database/migrations/2026_01_20_000003_create_campaign_dispatches_table.php",
+            "database/migrations/2026_01_20_000010_create_campaign_ab_tests_table.php",
+            "database/migrations/2026_01_20_000011_create_contact_engagements_table.php",
+            "database/migrations/2026_01_20_000012_create_campaign_insights_table.php",
+            "database/migrations/2026_01_20_161419_add_ai_intelligence_to_pricing_plans_table.php",
+            "database/migrations/2026_02_07_000001_upgrade_meta_api_version_to_v24.php",
+            "database/migrations/2026_02_12_000001_create_sending_domains_table.php",
+            "database/migrations/2026_02_12_000002_create_email_tracking_events_table.php",
+            "database/migrations/2026_02_12_000003_create_bounce_logs_table.php",
+            "database/migrations/2026_02_12_000004_create_email_suppressions_table.php",
+            "database/migrations/2026_02_12_000005_create_tracking_domains_table.php",
+            "database/migrations/2026_02_12_000006_add_email_deliverability_plan_display_features.php",
+            "database/migrations/2026_02_12_000007_add_domain_limits_to_existing_plans.php"
+        ],
+        "4.3": [
+            "database/migrations/2026_02_25_000001_upgrade_meta_api_version_to_v25.php"
+        ],
+        "4.4": [
+            "database/migrations/2026_03_20_000001_fix_duplicate_settings_keys.php",
+            "database/migrations/2026_03_20_000002_create_b2b_database_tables.php",
+            "database/migrations/2026_03_20_000003_add_auto_renewal_to_subscriptions_table.php"
+        ],
+        "4.5": [
+            "database/migrations/2026_05_10_000001_add_android_to_campaign_tables.php",
+            "database/migrations/2026_05_13_000001_allow_ad_hoc_unsubscribes.php",
+            "database/migrations/2026_05_13_000002_add_sender_info_to_campaign_messages.php",
+            "database/migrations/2026_05_17_000001_create_meta_lead_form_subscriptions.php",
+            "database/migrations/2026_05_17_000002_create_google_ads_lead_subscriptions.php",
+            "database/migrations/2026_05_19_000001_widen_workflow_uid_columns.php"
+        ],
+        "4.6.0": [],
+        "4.7.0": [
+            "database/migrations/2026_07_29_000001_add_unique_dispatch_index.php"
+        ],
+        "4.8.0": [
+            "database/migrations/2026_07_31_000001_create_email_events_table.php"
+        ],
+        "4.9.0": [],
+        "5.0.0": [
+            "database/migrations/2026_08_26_000001_create_templates_table_if_missing.php",
+            "database/migrations/2026_08_22_000001_update_global_template_welcome_placeholder.php",
+            "database/migrations/2026_08_22_000002_backfill_contact_engagement_scores.php",
+            "database/migrations/2026_08_10_000001_add_unified_inbox_plan_display_feature.php"
+        ]
+    },
+    "seeder": {
+        "4.2": [
+            "SettingsSeeder"
+        ],
+        "4.3": [
+            "SettingsSeeder"
+        ],
+        "4.4": [
+            "SettingsSeeder"
+        ],
+        "4.5": [
+            "SettingsSeeder"
+        ],
+        "4.6.0": [
+            "SettingsSeeder"
+        ],
+        "4.7.0": [
+            "SettingsSeeder"
+        ],
+        "4.8.0": [
+            "SettingsSeeder"
+        ],
+        "4.9.0": [
+            "SettingsSeeder"
+        ],
+        "5.0.0": [
+            "SettingsSeeder"
+        ]
+    }
+}

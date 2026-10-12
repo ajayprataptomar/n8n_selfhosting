@@ -1,0 +1,45 @@
+# XSender WhatsApp Service - cPanel Node.js Configuration
+# This file helps cPanel properly route requests to the Node.js application
+
+# Disable directory listing
+Options -Indexes
+
+# Enable rewrite engine
+RewriteEngine On
+
+# Pass all requests to Node.js app (handled by cPanel's Passenger)
+PassengerEnabled On
+PassengerAppType node
+PassengerStartupFile src/app.js
+
+# Set Node.js environment
+SetEnv NODE_ENV production
+
+# Prevent access to sensitive files
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+<FilesMatch "\.(env|json|log|md)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Allow access to package.json for npm
+<Files "package.json">
+    Order allow,deny
+    Allow from all
+</Files>
+
+# Security headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# Increase timeout for long-running operations
+<IfModule mod_reqtimeout.c>
+    RequestReadTimeout header=20-40,MinRate=500 body=20,MinRate=500
+</IfModule>

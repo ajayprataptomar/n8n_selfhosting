@@ -1,0 +1,12 @@
+@extends($themeManager->view('layouts.main'))
+@section('content')
+    @include($themeManager->view('sections.banner'))
+    @include($themeManager->view('sections.client'))
+    @include($themeManager->view('sections.service'))
+    @include($themeManager->view('sections.workflow'))
+    @include($themeManager->view('sections.plan'))
+    @include($themeManager->view('sections.feedback'))
+    @include($themeManager->view('sections.faq'))
+    @include($themeManager->view('sections.gateway'))
+    @include($themeManager->view('sections.blog'))
+@endsection

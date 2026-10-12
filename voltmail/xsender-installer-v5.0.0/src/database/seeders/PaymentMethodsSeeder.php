@@ -1,0 +1,163 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
+class PaymentMethodsSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        DB::table('payment_methods')->insert([
+            [
+                'id' => 1,
+                'currency_code' => 'USD',
+                'percent_charge' => 0.00000000,
+                'rate' => 1.00000000,
+                'name' => 'Stripe',
+                'unique_code' => 'STRIPE101',
+                'image' => '668a30cf594141720332495.svg',
+                'payment_parameter' => '{"secret_key":"###","publishable_key":"###"}',
+                'status' => '1',
+                'created_at' => '2022-05-31 12:25:39',
+                'updated_at' => '2024-07-07 00:08:15',
+            ],
+            [
+                'id' => 3,
+                'currency_code' => 'USD',
+                'percent_charge' => 1.00000000,
+                'rate' => 1.00000000,
+                'name' => 'Paypal',
+                'unique_code' => 'PAYPAL102',
+                'image' => '668a30c3b0a001720332483.svg',
+                'payment_parameter' => '{"environment":"sandbox","client_id":"###","secret":"###"}',
+                'status' => '1',
+                'created_at' => '2022-05-31 12:25:39',
+                'updated_at' => '2024-07-07 00:08:03',
+            ],
+            [
+                'id' => 4,
+                'currency_code' => 'USD',
+                'percent_charge' => 1.00000000,
+                'rate' => 1.00000000,
+                'name' => 'Paystack',
+                'unique_code' => 'PAYSTACK103',
+                'image' => '668a30abdc3301720332459.svg',
+                'payment_parameter' => '{"public_key":"###","secret_key":"###"}',
+                'status' => '1',
+                'created_at' => '2022-05-31 12:25:39',
+                'updated_at' => '2024-07-07 00:07:39',
+            ],
+            [
+                'id' => 5,
+                'currency_code' => 'BDT',
+                'percent_charge' => 0.00000000,
+                'rate' => 114.00000000,
+                'name' => 'SSL Commerz',
+                'unique_code' => 'SSLCOMMERZ104',
+                'image' => '668a33b1e5b561720333233.svg',
+                'payment_parameter' => '{"environment":"sandbox","store_id":"###","store_password":"###"}',
+                'status' => '1',
+                'created_at' => '2022-05-31 12:25:39',
+                'updated_at' => '2024-07-07 00:20:33',
+            ],
+            [
+                'id' => 8,
+                'currency_code' => 'USD',
+                'percent_charge' => 1.00000000,
+                'rate' => 1.00000000,
+                'name' => 'Paytm',
+                'unique_code' => 'PAYTM105',
+                'image' => '668a330e2c49a1720333070.svg',
+                'payment_parameter' => '{"PAYTM_ENVIRONMENT":"###","PAYTM_MID":"###","PAYTM_MERCHANT_KEY":"###","PAYTM_WEBSITE":"###"}',
+                'status' => '1',
+                'created_at' => '2022-09-14 12:25:24',
+                'updated_at' => '2024-07-07 00:17:50',
+            ],
+            [
+                'id' => 10,
+                'currency_code' => 'USD',
+                'percent_charge' => 1.00000000,
+                'rate' => 1.00000000,
+                'name' => 'Instamojo',
+                'unique_code' => 'INSTA106',
+                'image' => '668a3109203301720332553.svg',
+                'payment_parameter' => '{"api_key":"###","auth_token":"###","salt":"###"}',
+                'status' => '1',
+                'created_at' => '2022-09-14 12:25:24',
+                'updated_at' => '2024-07-07 00:09:13',
+            ],
+            [
+                'id' => 11,
+                'currency_code' => 'USD',
+                'percent_charge' => 3.00000000,
+                'rate' => 1.00000000,
+                'name' => 'RazorPay',
+                'unique_code' => 'RAZOR107',
+                'image' => '668a33a9078bd1720333225.svg',
+                'payment_parameter' => '{"key_id":"###","key_secret":"###"}',
+                'status' => '1',
+                'created_at' => '2022-09-14 12:25:24',
+                'updated_at' => '2024-07-07 00:20:25',
+            ],
+            [
+                'id' => 12,
+                'currency_code' => 'USD',
+                'percent_charge' => 1.00000000,
+                'rate' => 1.00000000,
+                'name' => 'Flutterwave',
+                'unique_code' => 'FLUTTER107',
+                'image' => '668a314c291001720332620.svg',
+                'payment_parameter' => '{"public_key":"demo_publisher_ke","secret_key":"demo_secret_key","encryption_key":"demo_encryption_key"}',
+                'status' => '1',
+                'created_at' => '2022-09-14 12:25:24',
+                'updated_at' => '2024-07-07 00:10:20',
+            ],
+            [
+                'id' => 13,
+                'currency_code' => 'USD',
+                'percent_charge' => 1.00000000,
+                'rate' => 1.00000000,
+                'name' => 'Coinbase Commerce',
+                'unique_code' => 'COINBASE108',
+                'image' => '668a336d7c9a91720333165.svg',
+                'payment_parameter' => '{"api_key":"###"}',
+                'status' => '1',
+                'created_at' => '2022-10-11 12:25:24',
+                'updated_at' => '2024-07-07 00:19:25',
+            ],
+            [
+                'id' => 14,
+                'currency_code' => 'BDT',
+                'percent_charge' => 1.00000000,
+                'rate' => 114.00000000,
+                'name' => 'Bkash',
+                'unique_code' => 'BKASH109',
+                'image' => '668fa0032baff1720688643.svg',
+                'payment_parameter' => '{"environment":"sandbox","user_name":"###","password":"###","api_key":"###","api_secret":"###"}',
+                'status' => '1',
+                'created_at' => '2022-10-11 12:25:24',
+                'updated_at' => '2024-07-11 09:04:03',
+            ],
+            [
+                'id' => 30,
+                'currency_code' => 'USD',
+                'percent_charge' => 5.00000000,
+                'rate' => 1.00000000,
+                'name' => 'Demo Manual Payment Gateway',
+                'unique_code' => 'MANUAL500',
+                'image' => '668a2bc1656c71720331201.svg',
+                'payment_parameter' => '{"a_text_input_custom_field":{"field_label":"A text Input custom field","field_name":"a_text_input_custom_field","field_type":"text"},"a_textarea_input_custom_field":{"field_label":"A textarea Input custom field","field_name":"a_textarea_input_custom_field","field_type":"textarea"},"a_file_input_custom_field":{"field_label":"A file Input custom field","field_name":"a_file_input_custom_field","field_type":"file"},"0":{"payment_gw_info":"This is a demo Manual Payment Gateway to demonstrate the feature"}}',
+                'status' => '1',
+                'created_at' => '2024-07-06 23:46:41',
+                'updated_at' => '2024-07-10 11:55:12',
+            ],
+        ]);
+    }
+}

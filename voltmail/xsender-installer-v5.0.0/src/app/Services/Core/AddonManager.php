@@ -23,8 +23,16 @@ class AddonManager
 
     public function __construct()
     {
-        $this->addonsPath  = base_path('../../addons');
-        $this->registryPath = base_path('../../addons/installed.json');
+        if (File::isDirectory(base_path('../addons'))) {
+            $this->addonsPath  = base_path('../addons');
+        } elseif (File::isDirectory(base_path('addons'))) {
+            $this->addonsPath  = base_path('addons');
+        } elseif (File::isDirectory(base_path('../../addons'))) {
+            $this->addonsPath  = base_path('../../addons');
+        } else {
+            $this->addonsPath  = base_path('../addons');
+        }
+        $this->registryPath = $this->addonsPath . '/installed.json';
     }
 
     /**
@@ -32,12 +40,16 @@ class AddonManager
      */
     public function ensureDirectories(): void
     {
-        if (!File::isDirectory($this->addonsPath)) {
-            File::makeDirectory($this->addonsPath, 0755, true);
-        }
+        try {
+            if (!File::isDirectory($this->addonsPath)) {
+                File::makeDirectory($this->addonsPath, 0755, true);
+            }
 
-        if (!File::exists($this->registryPath)) {
-            File::put($this->registryPath, json_encode([], JSON_PRETTY_PRINT));
+            if (!File::exists($this->registryPath)) {
+                File::put($this->registryPath, json_encode([], JSON_PRETTY_PRINT));
+            }
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::warning('AddonManager ensureDirectories warning: ' . $e->getMessage());
         }
     }
 

@@ -571,7 +571,13 @@ class AppServiceProvider extends ServiceProvider
     private function bootAddonProviders(): void
     {
         try {
-            $registryPath = base_path('../../addons/installed.json');
+            $registryPath = base_path('../addons/installed.json');
+            if (!File::exists($registryPath)) {
+                $registryPath = base_path('addons/installed.json');
+            }
+            if (!File::exists($registryPath)) {
+                $registryPath = base_path('../../addons/installed.json');
+            }
 
             if (!File::exists($registryPath)) {
                 return;

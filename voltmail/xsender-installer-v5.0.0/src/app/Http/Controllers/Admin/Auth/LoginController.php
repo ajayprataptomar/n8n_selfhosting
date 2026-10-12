@@ -39,11 +39,16 @@ class LoginController extends Controller
      */
     public function authenticate(Request $request): RedirectResponse {
 
-        $credentials = $request->validate([
+        $request->validate([
             'username' => ['required'],
             'password' => ['required'],
         ]);
-        if (Auth::guard('admin')->attempt($credentials)) {
+
+        $login = $request->input('username');
+        $password = $request->input('password');
+
+        if (Auth::guard('admin')->attempt(['username' => $login, 'password' => $password])
+            || Auth::guard('admin')->attempt(['email' => $login, 'password' => $password])) {
 
             $request->session()->regenerate();
             return redirect()->route('admin.dashboard');

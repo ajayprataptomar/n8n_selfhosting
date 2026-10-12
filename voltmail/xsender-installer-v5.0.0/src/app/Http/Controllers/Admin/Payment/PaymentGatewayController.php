@@ -89,7 +89,8 @@ class PaymentGatewayController extends Controller
         $title          = translate("Payment method update");
         $payment_method = PaymentMethod::findOrFail($id);
         $currencies     = json_decode(site_settings("currencies"), true);
-        return view($slug ? 'admin.payment.edit' : 'admin.manual_payment.edit', compact('title', 'payment_method', 'currencies'));
+        $isManual       = str_contains($payment_method->unique_code ?? '', 'MANUAL');
+        return view(($isManual && !$slug) ? 'admin.manual_payment.edit' : 'admin.payment.edit', compact('title', 'payment_method', 'currencies'));
     }
 
     /**

@@ -114,21 +114,25 @@
 								<div class="existing-fields">
 									@if($payment_method->payment_parameter != null)
 										@foreach($payment_method->payment_parameter as $key => $value)
-											@if($key!="0")
+											@if($key !== "0" && (is_object($value) || is_array($value)))
+												@php
+													$fieldLabel = is_object($value) ? ($value->field_label ?? '') : ($value['field_label'] ?? '');
+													$fieldType  = is_object($value) ? ($value->field_type ?? 'text') : ($value['field_type'] ?? 'text');
+												@endphp
 												<div class="row newdata-row gy-4 align-items-end {{ !$loop->first ? 'mt-1' : '' }}">
 													<div class="col-xxl-5 col-md-5">
 														<div class="form-inner">
 															<label for="fildName" class="form-label"> {{ translate('User Field Name')}} </label>
-															<input name="field_name[]" class="form-control" value="{{$value->field_label}}" type="text" placeholder=" {{ translate('User Field Name')}}">
+															<input name="field_name[]" class="form-control" value="{{$fieldLabel}}" type="text" placeholder=" {{ translate('User Field Name')}}">
 														</div>
 													</div>
 													<div class="col-xxl-5 col-md-5 col-sm-9">
 														<div class="form-inner">
 															<label for="typeSelect" class="form-label"> {{ translate("Type") }} </label>
 															<select name="field_type[]" class="form-control" id="typeSelect">
-																<option value="text" @if($value->field_type == 'text') selected @endif>{{ translate('Input Text')}}</option>
-																<option value="file" @if($value->field_type == 'file') selected @endif>{{ translate('File')}}</option>
-																<option value="textarea" @if($value->field_type == 'textarea') selected @endif>{{ translate('Textarea')}}</option>
+																<option value="text" @if($fieldType == 'text') selected @endif>{{ translate('Input Text')}}</option>
+																<option value="file" @if($fieldType == 'file') selected @endif>{{ translate('File')}}</option>
+																<option value="textarea" @if($fieldType == 'textarea') selected @endif>{{ translate('Textarea')}}</option>
 															</select>
 														</div>
 													</div>

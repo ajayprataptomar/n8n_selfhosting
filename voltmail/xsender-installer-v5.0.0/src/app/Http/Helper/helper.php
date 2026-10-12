@@ -1577,9 +1577,13 @@ use Illuminate\Support\Facades\Cache;
 			}
 
 			if (!$defaultCurrency) return "0.00"; 
-			$inputRate 		= $currencies[$currencyCode]['rate'];
-			$defaultRate 		= $currencies[$defaultCurrency]['rate'];
-			$convertedAmount 	= bcdiv(bcmul($amount, $defaultRate, 8), $inputRate, 8);
+			$inputRate 		= $currencies[$currencyCode]['rate'] ?? 1;
+			$defaultRate 		= $currencies[$defaultCurrency]['rate'] ?? 1;
+			if (function_exists('bcdiv') && function_exists('bcmul')) {
+				$convertedAmount = ($inputRate > 0) ? bcdiv(bcmul($amount, $defaultRate, 8), $inputRate, 8) : 0;
+			} else {
+				$convertedAmount = ($inputRate > 0) ? ($amount * $defaultRate) / $inputRate : 0;
+			}
 			return formatNumber($convertedAmount, $precision);
 		}
 
